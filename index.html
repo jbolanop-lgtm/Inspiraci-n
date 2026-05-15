@@ -11,20 +11,23 @@
     <style>
         body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
-        /* Pantalla de carga inicial */
+        /* 1. PANTALLA DE CARGA */
         #loadingScreen { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: white; z-index: 9999; display: flex; 
-            justify-content: center; align-items: center; 
+            justify-content: center; align-items: center; flex-direction: column;
         }
 
+        /* 2. PANTALLA DE LOGIN */
         #loginSection { min-height: 100vh; background: linear-gradient(135deg, #0d6efd 0%, #1a1d20 100%); display: none; }
         .login-card { background: white; border-radius: 15px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); width: 100%; max-width: 400px; }
         
-        .sidebar { min-height: 100vh; background-color: #1a1d20; color: white; display: flex; flex-direction: column; }
+        /* 3. APLICACIÓN PRINCIPAL */
+        .sidebar { min-height: 100vh; background-color: #1a1d20; color: white; display: flex; flex-direction: column; transition: all 0.3s; }
         .nav-link { color: #adb5bd; cursor: pointer; padding: 12px 20px; transition: 0.2s; }
         .nav-link:hover, .nav-link.active { color: white; background-color: #0d6efd; border-radius: 8px; }
         .card-kpi { border-radius: 12px; transition: transform 0.2s; }
+        .card-kpi:hover { transform: translateY(-3px); }
         .section-view { display: none; }
         .section-view.active { display: block; animation: fadeIn 0.4s; }
         .table-container { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
@@ -32,19 +35,21 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 767.98px) {
-            .sidebar { min-height: auto; position: sticky; top: 0; z-index: 1050; padding: 10px !important; }
-            .nav-link { padding: 8px 15px; font-size: 0.9rem; }
+            .sidebar { min-height: auto; position: sticky; top: 0; z-index: 1050; padding: 10px !important; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+            .sidebar h4 { font-size: 1.2rem; margin-bottom: 10px !important; margin-top: 0 !important; }
+            .nav-link { padding: 8px 15px; font-size: 0.9rem; white-space: nowrap; margin-right: 5px; }
+            .table-container { padding: 15px !important; }
             .main-content { padding: 15px !important; }
         }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body>
 
 <div id="loadingScreen">
-    <div class="text-center">
-        <div class="spinner-border text-primary" role="status"></div>
-        <p class="mt-2 fw-bold text-primary">Cargando Inspiración Boutique...</p>
-    </div>
+    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
+    <h5 class="mt-3 fw-bold text-primary">Cargando Inspiración Boutique...</h5>
 </div>
 
 <div id="loginSection" class="justify-content-center align-items-center">
@@ -52,18 +57,24 @@
         <div class="text-center mb-4">
             <h2 class="fw-bold text-primary"><i class="bi bi-lock-fill"></i></h2>
             <h4 class="fw-bold text-dark">Inspiración Boutique</h4>
-            <p class="text-muted small">Inicia sesión para continuar</p>
+            <p class="text-muted small">Acceso Seguro al Sistema</p>
         </div>
         <form onsubmit="iniciarSesion(event)">
             <div class="mb-3">
                 <label class="form-label small fw-bold text-secondary">Correo Electrónico</label>
-                <input type="email" id="loginEmail" class="form-control" required placeholder="admin@boutique.com">
+                <div class="input-group">
+                    <span class="input-group-text bg-light"><i class="bi bi-envelope"></i></span>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="admin@boutique.com" required>
+                </div>
             </div>
             <div class="mb-4">
                 <label class="form-label small fw-bold text-secondary">Contraseña</label>
-                <input type="password" id="loginPassword" class="form-control" required placeholder="••••••••">
+                <div class="input-group">
+                    <span class="input-group-text bg-light"><i class="bi bi-key"></i></span>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+                </div>
             </div>
-            <button type="submit" id="btnLogin" class="btn btn-primary w-100 fw-bold py-2">Ingresar</button>
+            <button type="submit" id="btnLogin" class="btn btn-primary w-100 fw-bold py-2 shadow-sm">Ingresar al Sistema</button>
         </form>
     </div>
 </div>
@@ -73,98 +84,62 @@
         <div class="col-md-2 sidebar p-3 shadow">
             <div>
                 <h4 class="text-center mt-3 mb-1 text-primary fw-bold"><i class="bi bi-cloud-check-fill"></i> Inspiración Boutique</h4>
-                <p class="text-center small text-success mb-4"><i class="bi bi-shield-check"></i> Conexión Segura</p>
-                <ul class="nav flex-row flex-md-column flex-nowrap overflow-auto">
-                    <li class="nav-item mb-md-2"><a class="nav-link active" onclick="cambiarVista('dashboard', this)"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
-                    <li class="nav-item mb-md-2"><a class="nav-link" onclick="cambiarVista('ventas', this)"><i class="bi bi-receipt me-2"></i> Ventas</a></li>
-                    <li class="nav-item mb-md-2"><a class="nav-link" onclick="cambiarVista('cartera', this)"><i class="bi bi-wallet2 me-2"></i> Cobros</a></li>
-                    <li class="nav-item mb-md-2"><a class="nav-link" onclick="cambiarVista('clientes', this)"><i class="bi bi-people-fill me-2"></i> Clientes</a></li>
-                    <li class="nav-item mb-md-2"><a class="nav-link" onclick="cambiarVista('cumpleanos', this)"><i class="bi bi-gift me-2"></i> Cumpleaños</a></li>
+                <p class="text-center small text-success fw-bold mb-4"><i class="bi bi-shield-lock-fill"></i> Sesión Activa</p>
+                
+                <ul class="nav flex-row flex-md-column flex-nowrap overflow-auto pb-1 pb-md-0">
+                    <li class="nav-item mb-md-2"><a id="nav-dashboard" class="nav-link active" onclick="cambiarVista('dashboard', this)"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
+                    <li class="nav-item mb-md-2"><a id="nav-ventas" class="nav-link" onclick="cambiarVista('ventas', this)"><i class="bi bi-receipt me-2"></i> Ventas</a></li>
+                    <li class="nav-item mb-md-2"><a id="nav-cartera" class="nav-link" onclick="cambiarVista('cartera', this)"><i class="bi bi-wallet2 me-2"></i> Cobros</a></li>
+                    <li class="nav-item mb-md-2"><a id="nav-clientes" class="nav-link" onclick="cambiarVista('clientes', this)"><i class="bi bi-people-fill me-2"></i> Clientes (CRM)</a></li>
+                    <li class="nav-item mb-md-2"><a id="nav-cumpleanos" class="nav-link" onclick="cambiarVista('cumpleanos', this)"><i class="bi bi-gift me-2"></i> Cumpleaños</a></li>
                 </ul>
             </div>
             <div class="mt-auto pt-4 pb-2 text-center d-none d-md-block">
                 <hr class="border-secondary">
-                <button class="btn btn-outline-danger btn-sm w-100 fw-bold" onclick="cerrarSesion()">Cerrar Sesión</button>
+                <button class="btn btn-outline-danger btn-sm w-100 fw-bold" onclick="cerrarSesion()">
+                    <i class="bi bi-box-arrow-left"></i> Cerrar Sesión
+                </button>
             </div>
         </div>
 
         <div class="col-md-10 p-4 main-content">
+            
             <div id="dashboard" class="section-view active">
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
-                    <h2 class="fw-bold text-dark">Panel de Control</h2>
-                    <input type="month" id="filtroMesDashboard" class="form-control w-auto shadow-sm" onchange="actualizarDashboard()">
+                    <h2 class="fw-bold mb-0 text-dark">Rentabilidad del Negocio</h2>
+                    <div class="d-flex gap-2">
+                        <div class="d-flex align-items-center gap-2 bg-white px-3 py-2 rounded-pill shadow-sm">
+                            <label class="fw-bold small text-muted text-nowrap mb-0"><i class="bi bi-calendar-month"></i> Analizar Mes:</label>
+                            <input type="month" id="filtroMesDashboard" class="form-control form-control-sm border-0 fw-bold text-primary" style="outline: none; box-shadow: none;" onchange="actualizarDashboard()">
+                        </div>
+                        <button class="btn btn-danger d-md-none rounded-circle shadow-sm" onclick="cerrarSesion()"><i class="bi bi-box-arrow-left"></i></button>
+                    </div>
                 </div>
-                <div class="row g-3">
-                    <div class="col-md-4"><div class="card card-kpi shadow-sm p-3 border-0" style="border-left: 5px solid #0d6efd;"><h6>Ingresos</h6><h3 id="kpi-ingresos">$ 0</h3></div></div>
-                    <div class="col-md-4"><div class="card card-kpi shadow-sm p-3 border-0" style="border-left: 5px solid #dc3545;"><h6>Costos</h6><h3 id="kpi-costos">$ 0</h3></div></div>
-                    <div class="col-md-4"><div class="card card-kpi shadow-sm p-3 border-0" style="border-left: 5px solid #198754;"><h6>Ganancia</h6><h3 id="kpi-ganancias">$ 0</h3></div></div>
-                </div>
-                <div class="card mt-4 p-3 border-0 shadow-sm"><canvas id="tendenciaChart" style="height: 300px;"></canvas></div>
-            </div>
 
-            </div>
-    </div>
-</div>
-
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getFirestore, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyApPs8hF5WWG2dmO22_L-yscjNX5CD8cQM",
-      authDomain: "inspiracionboutique-96047.firebaseapp.com",
-      projectId: "inspiracionboutique-96047",
-      storageBucket: "inspiracionboutique-96047.firebasestorage.app",
-      messagingSenderId: "990906061558",
-      appId: "1:990906061558:web:ee33c056f6fd0e6bb752d7"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    // CONTROL DE ESTADOS CORREGIDO
-    onAuthStateChanged(auth, (user) => {
-        const loading = document.getElementById('loadingScreen');
-        const login = document.getElementById('loginSection');
-        const app = document.getElementById('mainApp');
-
-        loading.style.display = 'none'; // Quitamos el cargando
-
-        if (user) {
-            login.style.display = 'none';
-            login.classList.remove('d-flex');
-            app.style.display = 'block';
-            iniciarApp();
-        } else {
-            app.style.display = 'none';
-            login.style.display = 'flex';
-            login.classList.add('d-flex');
-        }
-    });
-
-    window.iniciarSesion = async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
-        const pass = document.getElementById('loginPassword').value;
-        try {
-            await signInWithEmailAndPassword(auth, email, pass);
-        } catch (err) {
-            alert("Error: Datos incorrectos.");
-        }
-    };
-
-    window.cerrarSesion = () => {
-        if(confirm("¿Cerrar sesión en Inspiración Boutique?")) {
-            signOut(auth);
-        }
-    };
-
-    function iniciarApp() {
-        // Aquí llamas a tus funciones de renderizado y escucha de Firestore
-        console.log("Aplicación cargada y segura.");
-    }
-</script>
-</body>
-</html>
+                <div class="row mb-4 g-3">
+                    <div class="col-xl-3 col-md-6 col-12">
+                        <div class="card card-kpi shadow-sm border-0 h-100 p-3" style="border-bottom: 4px solid #0d6efd;">
+                            <div class="d-flex justify-content-between">
+                                <div><h6 class="text-uppercase text-muted small fw-bold mb-1">Ingresos (Ventas)</h6><h3 id="kpi-ingresos" class="text-primary fw-bold mb-0">$ 0</h3></div>
+                                <div class="bg-primary bg-opacity-10 rounded p-2 text-primary d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;"><i class="bi bi-cash-stack fs-5"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-12">
+                        <div class="card card-kpi shadow-sm border-0 h-100 p-3" style="border-bottom: 4px solid #dc3545;">
+                            <div class="d-flex justify-content-between">
+                                <div><h6 class="text-uppercase text-muted small fw-bold mb-1">Costos Mercancía</h6><h3 id="kpi-costos" class="text-danger fw-bold mb-0">$ 0</h3></div>
+                                <div class="bg-danger bg-opacity-10 rounded p-2 text-danger d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;"><i class="bi bi-box-seam fs-5"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-12">
+                        <div class="card card-kpi shadow-sm border-0 h-100 p-3" style="border-bottom: 4px solid #198754;">
+                            <div class="d-flex justify-content-between">
+                                <div><h6 class="text-uppercase text-muted small fw-bold mb-1">Ganancia Neta</h6><h3 id="kpi-ganancias" class="fw-bold mb-0 text-success">$ 0</h3></div>
+                                <div class="bg-success rounded p-2 d-flex align-items-center justify-content-center bg-opacity-10 text-success" style="width: 40px; height: 40px;"><i class="bi bi-graph-up-arrow fs-5"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-12">
+                        <div class="card card-kpi shadow-sm border-0 h-100 p-3" style="border-bottom: 4px solid #fd7e14
