@@ -63,6 +63,9 @@
                 <div class="input-group">
                     <span class="input-group-text bg-light"><i class="bi bi-key"></i></span>
                     <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+                    <button class="btn btn-light border" type="button" onclick="togglePassword()" title="Ver contraseña">
+                        <i class="bi bi-eye-slash text-secondary" id="togglePasswordIcon"></i>
+                    </button>
                 </div>
             </div>
             <button type="submit" id="btnLogin" class="btn btn-primary w-100 fw-bold py-2 shadow-sm">Ingresar al Sistema</button>
@@ -339,14 +342,13 @@
     const modalAbono = new bootstrap.Modal(document.getElementById('modalAbono'));
     const modalPerfil = new bootstrap.Modal(document.getElementById('modalPerfilCliente'));
 
-    // ================== LÓGICA DE SEGURIDAD CORREGIDA ==================
+    // ================== LÓGICA DE SEGURIDAD ==================
     
     onAuthStateChanged(auth, (user) => {
         const loginSection = document.getElementById('loginSection');
         const mainApp = document.getElementById('mainApp');
 
         if (user) {
-            // SOLUCIÓN: Removemos la clase d-flex que forzaba a la pantalla a quedarse visible
             loginSection.classList.remove('d-flex');
             loginSection.style.display = 'none';
             mainApp.style.display = 'block';
@@ -359,8 +361,24 @@
         }
     });
 
+    // NUEVO: Lógica para ver/ocultar contraseña
+    window.togglePassword = function() {
+        const passInput = document.getElementById('loginPassword');
+        const icon = document.getElementById('togglePasswordIcon');
+        
+        if (passInput.type === 'password') {
+            passInput.type = 'text';
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        } else {
+            passInput.type = 'password';
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        }
+    };
+
     window.iniciarSesion = async function(e) {
-        if(e) e.preventDefault(); // Evitamos que la página se recargue
+        if(e) e.preventDefault(); 
         const email = document.getElementById('loginEmail').value;
         const pass = document.getElementById('loginPassword').value;
         const btn = document.getElementById('btnLogin');
@@ -385,7 +403,6 @@
     window.cerrarSesion = async function() {
         if(confirm("¿Estás seguro de cerrar la sesión de la Boutique?")) {
             await signOut(auth);
-            // Aseguramos que recargue limpio
             window.location.reload(); 
         }
     };
