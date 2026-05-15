@@ -43,7 +43,6 @@
 </head>
 <body>
 
-<!-- ===================================== PANTALLA DE LOGIN ===================================== -->
 <div id="loginSection" class="d-flex justify-content-center align-items-center">
     <div class="login-card">
         <div class="text-center mb-4">
@@ -71,10 +70,8 @@
     </div>
 </div>
 
-<!-- ===================================== APLICACIÓN PRINCIPAL (OCULTA INICIALMENTE) ===================================== -->
 <div class="container-fluid" id="mainApp" style="display: none;">
     <div class="row">
-        <!-- Sidebar -->
         <div class="col-md-2 sidebar p-3 shadow">
             <div>
                 <h4 class="text-center mt-3 mb-1 text-primary fw-bold"><i class="bi bi-cloud-check-fill"></i> Inspiración Boutique</h4>
@@ -89,7 +86,6 @@
                 </ul>
             </div>
             
-            <!-- Botón de Cerrar Sesión en la parte inferior del menú -->
             <div class="mt-auto pt-4 pb-2 text-center d-none d-md-block">
                 <hr class="border-secondary">
                 <button class="btn btn-outline-danger btn-sm w-100 fw-bold" onclick="cerrarSesion()">
@@ -98,10 +94,8 @@
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="col-md-10 p-4 main-content">
             
-            <!-- VIEW: DASHBOARD -->
             <div id="dashboard" class="section-view active">
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
                     <h2 class="fw-bold mb-0 text-dark">Rentabilidad del Negocio</h2>
@@ -110,7 +104,6 @@
                             <label class="fw-bold small text-muted text-nowrap mb-0"><i class="bi bi-calendar-month"></i> Mes:</label>
                             <input type="month" id="filtroMesDashboard" class="form-control form-control-sm border-0 fw-bold text-primary" style="outline: none; box-shadow: none;" onchange="actualizarDashboard()">
                         </div>
-                        <!-- Botón cerrar sesión móvil -->
                         <button class="btn btn-danger d-md-none rounded-circle shadow-sm" onclick="cerrarSesion()"><i class="bi bi-box-arrow-left"></i></button>
                     </div>
                 </div>
@@ -140,7 +133,6 @@
                 </div>
             </div>
 
-            <!-- VIEW: VENTAS -->
             <div id="ventas" class="section-view">
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <h2 class="fw-bold mb-0">Historial de Ventas</h2>
@@ -160,7 +152,6 @@
                 </div>
             </div>
 
-            <!-- VIEW: CARTERA -->
             <div id="cartera" class="section-view">
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
                     <h2 class="fw-bold mb-0">Control de Cobros</h2>
@@ -181,7 +172,6 @@
                 </div>
             </div>
 
-            <!-- VIEW: CLIENTES CRM -->
             <div id="clientes" class="section-view">
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <h2 class="fw-bold mb-0">Directorio de Clientes</h2>
@@ -198,7 +188,6 @@
                 </div>
             </div>
 
-            <!-- VIEW: CUMPLEAÑOS -->
             <div id="cumpleanos" class="section-view">
                 <h2 class="fw-bold mb-4">Cumpleaños de este Mes <i class="bi bi-balloon-fill text-danger"></i></h2>
                 <div class="table-container p-4">
@@ -221,7 +210,6 @@
     <option value="Blusa Dama"><option value="Camisa Caballero"><option value="Jeans Dama"><option value="Jeans Caballero"><option value="Pantalón Niño"><option value="Vestido Niña"><option value="Conjunto Infantil"><option value="Zapatos Dama"><option value="Zapatos Caballero"><option value="Ropa Interior"><option value="Accesorios / Bisutería">
 </datalist>
 
-<!-- ===================================== MODALES (VENTA, ABONO, PERFIL) ===================================== -->
 <div class="modal fade" id="modalNuevaVenta" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content border-0 shadow-lg">
@@ -320,13 +308,11 @@
   </div>
 </div>
 
-<!-- ===================================== SCRIPTS FIREBASE ===================================== -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-    // IMPORTANTE: Nuevas librerías de autenticación
     import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
     const firebaseConfig = {
@@ -340,56 +326,55 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const auth = getAuth(app); // Inicializamos Autenticación
+    const auth = getAuth(app); 
     const ventasRef = collection(db, "ventas");
 
     window.baseVentas = [];
     window.clientesDirectorio = []; 
     window.clienteLlaveActiva = ""; 
     window.chartTendencia = null;
-    let unsubscribeFirestore = null; // Variable para apagar la BD si cerramos sesión
+    let unsubscribeFirestore = null; 
 
     const modalVenta = new bootstrap.Modal(document.getElementById('modalNuevaVenta'));
     const modalAbono = new bootstrap.Modal(document.getElementById('modalAbono'));
     const modalPerfil = new bootstrap.Modal(document.getElementById('modalPerfilCliente'));
 
-    // ================== LÓGICA DE SEGURIDAD (LOGIN/LOGOUT) ==================
+    // ================== LÓGICA DE SEGURIDAD CORREGIDA ==================
     
-    // Escuchador de estado (Revisa si el usuario está conectado o no)
     onAuthStateChanged(auth, (user) => {
         const loginSection = document.getElementById('loginSection');
         const mainApp = document.getElementById('mainApp');
 
         if (user) {
-            // Usuario conectado: Oculta login, muestra App, Carga BD
+            // SOLUCIÓN: Removemos la clase d-flex que forzaba a la pantalla a quedarse visible
+            loginSection.classList.remove('d-flex');
             loginSection.style.display = 'none';
             mainApp.style.display = 'block';
             iniciarBaseDeDatos();
         } else {
-            // Usuario desconectado: Muestra login, oculta App, Apaga BD
-            loginSection.style.display = 'flex';
+            loginSection.style.display = '';
+            loginSection.classList.add('d-flex');
             mainApp.style.display = 'none';
-            if (unsubscribeFirestore) {
-                unsubscribeFirestore(); // Apaga la lectura de datos por seguridad
-            }
+            if (unsubscribeFirestore) unsubscribeFirestore();
         }
     });
 
     window.iniciarSesion = async function(e) {
-        e.preventDefault();
+        if(e) e.preventDefault(); // Evitamos que la página se recargue
         const email = document.getElementById('loginEmail').value;
         const pass = document.getElementById('loginPassword').value;
         const btn = document.getElementById('btnLogin');
         
+        if(!email || !pass) return;
+
         btn.innerText = 'Validando credenciales...'; 
         btn.disabled = true;
 
         try {
             await signInWithEmailAndPassword(auth, email, pass);
-            // El onAuthStateChanged detectará el éxito automáticamente
-            document.getElementById('loginPassword').value = ''; // Limpiamos clave por seguridad
+            document.getElementById('loginPassword').value = ''; 
         } catch (error) {
-            alert("Error: Correo o contraseña incorrectos. Verifica en Firebase.");
+            alert("Acceso denegado: Verifica que tu correo y contraseña estén correctos. (Código: " + error.code + ")");
             console.error(error);
         } finally {
             btn.innerText = 'Ingresar al Sistema'; 
@@ -397,9 +382,11 @@
         }
     };
 
-    window.cerrarSesion = function() {
-        if(confirm("¿Estás seguro de cerrar la sesión?")) {
-            signOut(auth);
+    window.cerrarSesion = async function() {
+        if(confirm("¿Estás seguro de cerrar la sesión de la Boutique?")) {
+            await signOut(auth);
+            // Aseguramos que recargue limpio
+            window.location.reload(); 
         }
     };
 
