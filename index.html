@@ -34,7 +34,7 @@
             font-family: 'Poppins', sans-serif; 
             min-height: 100vh; 
             overflow-x: hidden;
-            cursor: default; /* Flecha normal en toda la app */
+            cursor: default;
         }
 
         /* Orbes de luz de fondo */
@@ -59,12 +59,13 @@
             border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.3) !important;
             color: white;
+            transition: all 0.3s ease;
         }
 
         .login-card { border-radius: 24px; }
         .modal-content { border-radius: 24px; background: rgba(15, 13, 25, 0.95) !important; }
         .modal-header, .modal-footer { border-color: var(--glass-border); }
-        .card-kpi, .widget-box { user-select: none; } /* Evita sombrear el texto al hacer clics rápidos */
+        .card-kpi, .widget-box { user-select: none; } 
         .card-kpi:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.15) !important; }
 
         /* Botones */
@@ -77,13 +78,13 @@
         .btn-close { filter: invert(1) opacity(0.5); cursor: pointer; }
         .bi-eye-slash { cursor: pointer; }
 
-        /* Inputs (Aquí SÍ queremos el cursor de escritura) */
+        /* Inputs */
         .form-control, .form-select { 
             background-color: rgba(15, 13, 25, 0.8) !important; 
             border: 1px solid var(--glass-border); 
             color: #ffffff !important; 
             border-radius: 12px; 
-            cursor: text; /* Cursor de escritura activo solo en las cajas de texto */
+            cursor: text; 
         }
         .form-select { cursor: pointer; }
         .form-control:focus, .form-select:focus { 
@@ -97,19 +98,26 @@
         select option { background-color: #0B0914 !important; color: #ffffff !important; }
         .input-group-text { background: rgba(255,255,255,0.05) !important; color: var(--primary) !important; border-radius: 12px; }
 
-        /* Sidebar */
-        .sidebar { background: transparent; border-right: 1px solid var(--glass-border); min-height: 100vh; user-select: none; }
+        /* === BARRA LATERAL (Desktop) === */
+        .sidebar { background: transparent; border-right: 1px solid var(--glass-border); min-height: 100vh; user-select: none; transition: all 0.3s ease; }
         .nav-link { 
             color: var(--text-sec); 
             padding: 12px 20px; 
             border-radius: 12px; 
             transition: 0.3s; 
             margin-bottom: 5px; 
-            cursor: pointer; /* LA MANITO REGRESÓ A LOS MENÚS */
+            cursor: pointer; 
+            display: flex;
+            align-items: center;
+            font-weight: 500;
         }
+        .nav-link i { font-size: 1.25rem; margin-right: 14px; opacity: 0.8; }
         .nav-link:hover { background: rgba(255,255,255,0.04); color: white; }
         .nav-link.active { background: var(--btn-gradient); color: white; box-shadow: var(--shadow-glow); }
+        .nav-link.active i { color: white; opacity: 1; }
         .cloud-indicator { color: var(--accent); }
+        
+        .mobile-topbar { display: none; }
 
         /* Tablas */
         .table { color: var(--text-main); cursor: default; }
@@ -119,12 +127,7 @@
         .table-hover tbody tr:hover td { background-color: rgba(255,255,255,0.04) !important; color: white; }
         
         .fila-articulo { background: rgba(15, 13, 25, 0.5); border: 1px solid var(--glass-border); padding: 15px; border-radius: 12px;}
-        .badge.bg-light.text-dark { 
-            background: rgba(255,255,255,0.1) !important; 
-            color: #ffffff !important; 
-            border: 1px solid rgba(255,255,255,0.2) !important; 
-            font-weight: 500; 
-        }
+        .badge.bg-light.text-dark { background: rgba(255,255,255,0.1) !important; color: #ffffff !important; border: 1px solid rgba(255,255,255,0.2) !important; font-weight: 500; }
         .widget-label { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.5px; color: var(--text-sec); }
 
         /* Vistas y Animaciones */
@@ -138,13 +141,57 @@
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; cursor: pointer; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
 
+        /* =========================================
+           DISEÑO RESPONSIVE MÓVIL (APP NATIVA)
+           ========================================= */
         @media (max-width: 767.98px) {
-            .sidebar { min-height: auto; position: sticky; top: 0; z-index: 1050; padding: 10px !important; border-right: none; border-bottom: 1px solid var(--glass-border); background: rgba(11, 9, 20, 0.9); backdrop-filter: blur(20px); }
-            .cloud-indicator { display: none; }
-            .nav { flex-direction: row !important; overflow-x: auto; flex-wrap: nowrap; }
-            .nav-link { padding: 8px 15px; font-size: 0.9rem; white-space: nowrap; margin-right: 5px; margin-bottom:0; }
-            .widget-header { flex-direction: row; flex-wrap: wrap; justify-content: center; width: 100%;}
-            .widget-box { width: 48%; }
+            .login-card { padding: 30px 20px; border-radius: 24px; width: 92%; }
+            
+            /* Topbar Móvil */
+            .mobile-topbar { 
+                display: flex !important; justify-content: space-between; align-items: center; 
+                padding: 15px 20px; background: rgba(11, 9, 20, 0.9); backdrop-filter: blur(20px); 
+                position: sticky; top: 0; z-index: 1040; border-bottom: 1px solid var(--glass-border); 
+            }
+            
+            /* Bottom Navigation Bar */
+            .sidebar { 
+                position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; min-height: 75px; 
+                padding: 0 !important; border-radius: 24px 24px 0 0; z-index: 1050; 
+                flex-direction: row !important; align-items: center; justify-content: center; 
+                box-shadow: 0 -10px 40px rgba(0,0,0,0.5); 
+                background: rgba(15, 13, 25, 0.95); backdrop-filter: blur(20px);
+                border-top: 1px solid var(--glass-border);
+                border-right: none;
+                border-bottom: none;
+            }
+            .sidebar > div:first-child, .sidebar > div:last-child { display: none !important; } 
+            .nav { flex-direction: row !important; width: 100%; justify-content: space-evenly; align-items: center; margin: 0; padding: 0 5px; overflow: visible;}
+            .nav-item { margin: 0; }
+            .nav-link { 
+                flex-direction: column; padding: 8px 10px; margin: 0; font-size: 0.65rem; 
+                border-radius: 12px; font-weight: 500; align-items: center; color: var(--text-sec); 
+                background: transparent !important; box-shadow: none !important;
+            }
+            .nav-link i { margin-right: 0; margin-bottom: 3px; font-size: 1.3rem; opacity: 1; transition: 0.2s;}
+            .nav-link.active { color: var(--primary) !important; }
+            .nav-link.active i { transform: translateY(-3px); text-shadow: 0 0 15px rgba(217, 70, 239, 0.6); color: var(--primary) !important; } 
+            
+            /* Ajustes de Contenido */
+            .main-content { padding: 20px 15px 95px 15px !important; } 
+            .card-kpi { padding: 20px; }
+            .table-container { padding: 15px; }
+            
+            /* Widgets en columna en móvil */
+            .widget-header { flex-direction: column; gap: 10px !important; align-items: stretch; }
+            .widget-box { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 15px !important;}
+            .widget-box .widget-label { margin-bottom: 0 !important; }
+            
+            /* Ajustes Modales */
+            .modal-body { padding: 20px 15px !important; }
+            .modal-header { padding: 15px 20px; }
+            .modal-footer { padding: 15px 20px; flex-direction: column-reverse; gap: 10px; }
+            .modal-footer button { width: 100%; margin: 0; }
         }
         .nav::-webkit-scrollbar { display: none; }
         .nav { -ms-overflow-style: none; scrollbar-width: none; }
@@ -152,10 +199,10 @@
 </head>
 <body>
 
-<div id="loginSection" class="d-flex justify-content-center align-items-center">
+<div id="loginSection" class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
     <div class="login-card">
         <div class="text-center mb-4">
-            <img src="logo.png" alt="Inspiración Boutique Logo" class="img-fluid mb-3" style="max-height: 80px; filter: drop-shadow(0 0 15px rgba(255,255,255,0.15));">
+            <img src="logo.png" alt="Inspiración Boutique" class="img-fluid mb-3" style="max-height: 80px; filter: drop-shadow(0 0 15px rgba(255,255,255,0.15));">
             <p class="small text-muted">Acceso Seguro al Sistema</p>
         </div>
         <form onsubmit="iniciarSesion(event)">
@@ -181,21 +228,31 @@
     </div>
 </div>
 
-<div class="container-fluid" id="mainApp" style="display: none;">
-    <div class="row">
-        <div class="col-md-2 sidebar p-3">
+<div class="container-fluid p-0" id="mainApp" style="display: none;">
+    <div class="mobile-topbar shadow-sm">
+        <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-heptagon-fill fs-3 text-primary"></i>
+            <h5 class="mb-0 fw-bold text-white" style="letter-spacing: -0.5px;">Boutique</h5>
+        </div>
+        <button class="btn btn-outline-danger rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; border-color: var(--glass-border); background: rgba(244, 63, 94, 0.1);" onclick="cerrarSesion()">
+            <i class="bi bi-power fs-5"></i>
+        </button>
+    </div>
+
+    <div class="row g-0">
+        <div class="col-md-2 sidebar d-flex flex-column p-3 p-md-4">
             <div>
                 <div class="text-center mt-3 mb-4">
                     <img src="logo.png" alt="Inspiración Boutique" class="img-fluid mb-2" style="max-height: 60px;">
                     <p class="cloud-indicator mb-0 small"><i class="bi bi-shield-lock-fill"></i> Panel Seguro</p>
                 </div>
                 
-                <ul class="nav flex-row flex-md-column flex-nowrap overflow-auto pb-1 pb-md-0">
-                    <li class="nav-item"><a id="nav-dashboard" class="nav-link active" onclick="cambiarVista('dashboard', this)"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
-                    <li class="nav-item"><a id="nav-ventas" class="nav-link" onclick="cambiarVista('ventas', this)"><i class="bi bi-receipt me-2"></i> Ventas</a></li>
-                    <li class="nav-item"><a id="nav-cartera" class="nav-link" onclick="cambiarVista('cartera', this)"><i class="bi bi-wallet2 me-2"></i> Cobros</a></li>
-                    <li class="nav-item"><a id="nav-clientes" class="nav-link" onclick="cambiarVista('clientes', this)"><i class="bi bi-people-fill me-2"></i> Clientes (CRM)</a></li>
-                    <li class="nav-item"><a id="nav-cumpleanos" class="nav-link" onclick="cambiarVista('cumpleanos', this)"><i class="bi bi-gift me-2"></i> Cumpleaños</a></li>
+                <ul class="nav flex-row flex-md-column flex-nowrap w-100">
+                    <li class="nav-item"><a id="nav-dashboard" class="nav-link active" onclick="cambiarVista('dashboard', this)"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+                    <li class="nav-item"><a id="nav-ventas" class="nav-link" onclick="cambiarVista('ventas', this)"><i class="bi bi-receipt"></i> Ventas</a></li>
+                    <li class="nav-item"><a id="nav-cartera" class="nav-link" onclick="cambiarVista('cartera', this)"><i class="bi bi-wallet2"></i> Cobros</a></li>
+                    <li class="nav-item"><a id="nav-clientes" class="nav-link" onclick="cambiarVista('clientes', this)"><i class="bi bi-people-fill"></i> Clientes</a></li>
+                    <li class="nav-item"><a id="nav-cumpleanos" class="nav-link" onclick="cambiarVista('cumpleanos', this)"><i class="bi bi-gift"></i> Cumples</a></li>
                 </ul>
             </div>
             
@@ -217,20 +274,19 @@
                             <label class="small text-muted text-nowrap mb-0"><i class="bi bi-calendar-month"></i> Mes:</label>
                             <input type="month" id="filtroMesDashboard" class="form-control form-control-sm border-0 fw-bold text-primary p-0" style="outline: none; box-shadow: none; background:transparent !important;" onchange="actualizarDashboard()">
                         </div>
-                        <button class="btn btn-outline-dark d-md-none text-danger px-3" onclick="cerrarSesion()"><i class="bi bi-box-arrow-left"></i></button>
                     </div>
                 </div>
 
-                <div class="row mb-4 g-3">
-                    <div class="col-xl-3 col-md-6 col-12"><div class="card-kpi p-3"><div class="d-flex justify-content-between"><div><h6 class="text-uppercase mb-1">Ingresos (Ventas)</h6><h3 id="kpi-ingresos" class="text-primary mb-0">$ 0</h3></div><div class="rounded p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: rgba(217, 70, 239, 0.1); color: var(--primary);"><i class="bi bi-cash-stack fs-5"></i></div></div></div></div>
-                    <div class="col-xl-3 col-md-6 col-12"><div class="card-kpi p-3"><div class="d-flex justify-content-between"><div><h6 class="text-uppercase mb-1">Costos Mercancía</h6><h3 id="kpi-costos" class="text-danger mb-0">$ 0</h3></div><div class="rounded p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: rgba(244, 63, 94, 0.1); color: var(--danger);"><i class="bi bi-box-seam fs-5"></i></div></div></div></div>
-                    <div class="col-xl-3 col-md-6 col-12"><div class="card-kpi p-3"><div class="d-flex justify-content-between"><div><h6 class="text-uppercase mb-1">Ganancia Neta</h6><h3 id="kpi-ganancias" class="mb-0 text-success">$ 0</h3></div><div class="rounded p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: rgba(16, 185, 129, 0.1); color: var(--success);"><i class="bi bi-graph-up-arrow fs-5"></i></div></div></div></div>
-                    <div class="col-xl-3 col-md-6 col-12"><div class="card-kpi p-3"><div class="d-flex justify-content-between"><div><h6 class="text-uppercase mb-1">Cant. de Ventas</h6><h3 id="kpi-cantidad" class="mb-0 text-warning">0</h3></div><div class="rounded p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: rgba(245, 158, 11, 0.1); color: var(--warning);"><i class="bi bi-bag-check fs-5"></i></div></div></div></div>
+                <div class="row mb-4 g-3 g-md-4">
+                    <div class="col-xl-3 col-md-6 col-12"><div class="card-kpi p-3 p-md-4"><div class="d-flex justify-content-between"><div><h6 class="text-uppercase mb-1">Ingresos</h6><h3 id="kpi-ingresos" class="text-primary mb-0">$ 0</h3></div><div class="rounded p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: rgba(217, 70, 239, 0.1); color: var(--primary);"><i class="bi bi-cash-stack fs-5"></i></div></div></div></div>
+                    <div class="col-xl-3 col-md-6 col-12"><div class="card-kpi p-3 p-md-4"><div class="d-flex justify-content-between"><div><h6 class="text-uppercase mb-1">Costos</h6><h3 id="kpi-costos" class="text-danger mb-0">$ 0</h3></div><div class="rounded p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: rgba(244, 63, 94, 0.1); color: var(--danger);"><i class="bi bi-box-seam fs-5"></i></div></div></div></div>
+                    <div class="col-xl-3 col-md-6 col-12"><div class="card-kpi p-3 p-md-4"><div class="d-flex justify-content-between"><div><h6 class="text-uppercase mb-1">Ganancia</h6><h3 id="kpi-ganancias" class="mb-0 text-success">$ 0</h3></div><div class="rounded p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: rgba(16, 185, 129, 0.1); color: var(--success);"><i class="bi bi-graph-up-arrow fs-5"></i></div></div></div></div>
+                    <div class="col-xl-3 col-md-6 col-12"><div class="card-kpi p-3 p-md-4"><div class="d-flex justify-content-between"><div><h6 class="text-uppercase mb-1">Volumen</h6><h3 id="kpi-cantidad" class="mb-0 text-warning">0</h3></div><div class="rounded p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: rgba(245, 158, 11, 0.1); color: var(--warning);"><i class="bi bi-bag-check fs-5"></i></div></div></div></div>
                 </div>
 
-                <div class="row mb-4 g-3">
+                <div class="row mb-4 g-3 g-md-4">
                     <div class="col-lg-8 col-12">
-                        <div class="table-container p-3 h-100">
+                        <div class="table-container p-3 p-md-4 h-100">
                             <h6 class="mb-3 text-muted"><i class="bi bi-activity me-1 text-primary"></i> Tendencia Diaria de Ingresos</h6>
                             <div style="position: relative; height: 250px; width: 100%;"><canvas id="tendenciaChart"></canvas></div>
                         </div>
@@ -240,7 +296,7 @@
                             <h6 class="text-uppercase small mb-1 text-danger"><i class="bi bi-wallet2 me-1"></i> Cartera Global</h6>
                             <p class="small mb-4 text-muted">Total de dinero pendiente por cobrar.</p>
                             <h1 id="kpi-cartera" class="mb-0 display-5 mt-auto">$ 0</h1>
-                            <div class="mt-3"><button class="btn btn-outline-primary btn-sm w-100" onclick="cambiarVista('cartera', document.getElementById('nav-cartera'))">Ir a cobrar <i class="bi bi-arrow-right"></i></button></div>
+                            <div class="mt-3"><button class="btn btn-outline-primary btn-sm w-100 py-2" onclick="cambiarVista('cartera', document.getElementById('nav-cartera'))">Ir a cobrar <i class="bi bi-arrow-right"></i></button></div>
                         </div>
                     </div>
                 </div>
@@ -250,31 +306,35 @@
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
                     <h2 class="mb-0 flex-shrink-0">Historial de Ventas</h2>
                     
+                    <button class="btn btn-primary px-4 py-2 w-100 d-md-none" onclick="abrirModalNuevaVenta()">
+                        <i class="bi bi-plus-lg me-2"></i> Nueva Venta
+                    </button>
+
                     <div class="d-flex gap-2 flex-wrap justify-content-center flex-grow-1 px-lg-3 widget-header">
                         <div class="widget-box text-center p-2 px-3">
                             <div class="widget-label">INGRESOS</div>
-                            <div class="fs-6" id="badge-ingresos">$ 0</div>
+                            <div class="fs-6 fw-bold" id="badge-ingresos">$ 0</div>
                         </div>
                         <div class="widget-box text-center p-2 px-3">
                             <div class="widget-label">COSTOS</div>
-                            <div class="text-danger fs-6" id="badge-costos">$ 0</div>
+                            <div class="text-danger fw-bold fs-6" id="badge-costos">$ 0</div>
                         </div>
                         <div class="widget-box text-center p-2 px-3">
                             <div class="widget-label">GANANCIA</div>
-                            <div class="text-success fs-6" id="badge-ganancias">$ 0</div>
+                            <div class="text-success fw-bold fs-6" id="badge-ganancias">$ 0</div>
                         </div>
                         <div class="widget-box text-center p-2 px-3">
                             <div class="widget-label">MARGEN</div>
-                            <div class="text-primary fs-6" id="badge-margen">0%</div>
+                            <div class="text-primary fw-bold fs-6" id="badge-margen">0%</div>
                         </div>
                     </div>
 
-                    <button class="btn btn-primary px-3 flex-shrink-0" onclick="abrirModalNuevaVenta()">
+                    <button class="btn btn-primary px-3 flex-shrink-0 d-none d-md-inline-block" onclick="abrirModalNuevaVenta()">
                         <i class="bi bi-plus-lg me-1"></i> Nueva Venta
                     </button>
                 </div>
                 
-                <div class="table-container p-3">
+                <div class="table-container p-3 p-md-4">
                     <div class="table-responsive">
                         <table class="table table-hover align-middle" style="min-width: 800px;">
                             <thead>
@@ -291,10 +351,9 @@
                     <h2 class="mb-0">Control de Cobros</h2>
                     <div class="d-flex gap-2 w-100 flex-md-nowrap" style="max-width: 400px;">
                         <input type="text" id="buscadorCartera" class="form-control" placeholder="🔍 Buscar deudor..." onkeyup="filtrarCartera()">
-                        <button class="btn btn-outline-dark text-nowrap" onclick="exportarDeudores()"><i class="bi bi-download"></i></button>
                     </div>
                 </div>
-                <div class="table-container p-3">
+                <div class="table-container p-3 p-md-4">
                     <div class="table-responsive">
                         <table class="table table-hover align-middle" style="min-width: 700px;">
                             <thead>
@@ -310,7 +369,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <h2 class="mb-0">Directorio de Clientes</h2>
                 </div>
-                <div class="table-container p-3">
+                <div class="table-container p-3 p-md-4">
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
                             <thead>
@@ -324,7 +383,7 @@
 
             <div id="cumpleanos" class="section-view">
                 <h2 class="mb-4">Cumpleaños de este Mes <i class="bi bi-stars text-primary"></i></h2>
-                <div class="table-container p-3">
+                <div class="table-container p-3 p-md-4">
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
                             <thead>
@@ -389,11 +448,11 @@
                 </select>
             </div>
             <div class="col-md-8 text-end mb-3">
-                <div class="d-inline-block p-3 rounded glass-panel text-end ms-auto">
-                    <p class="small text-muted mb-1 text-uppercase widget-label">Resumen de Factura</p>
-                    <h6 class="mb-1 text-danger small">Costo Total: <span id="resumenCosto">$ 0</span></h6>
-                    <h6 class="mb-1 text-success small">Ganancia: <span id="resumenGanancia">$ 0</span></h6>
-                    <h3 class="mb-0 text-primary">Total Venta: <span id="resumenVenta">$ 0</span></h3>
+                <div class="d-inline-block p-3 rounded glass-panel text-start w-100 w-md-auto ms-auto">
+                    <p class="small text-muted mb-3 text-uppercase widget-label border-bottom border-secondary pb-2">Resumen de Factura</p>
+                    <div class="d-flex justify-content-between"><h6 class="mb-1 text-danger small">Costo Total:</h6> <span class="ms-3 text-white" id="resumenCosto">$ 0</span></div>
+                    <div class="d-flex justify-content-between"><h6 class="mb-2 text-success small">Ganancia:</h6> <span class="ms-3 text-white" id="resumenGanancia">$ 0</span></div>
+                    <div class="d-flex justify-content-between mt-2 pt-2 border-top border-secondary"><h3 class="mb-0 text-primary fs-5 mt-1">Total Venta:</h3> <h3 class="mb-0 text-primary ms-3" id="resumenVenta">$ 0</h3></div>
                 </div>
             </div>
           </div>
@@ -414,10 +473,10 @@
       <div class="modal-body p-4 text-center">
         <p class="small text-muted mb-1 text-uppercase" id="textoClienteAbono">---</p>
         <h3 class="text-danger mb-4" id="textoSaldoAbono">---</h3>
-        <div class="text-start"><label class="form-label small text-muted">Monto del abono</label><input type="number" id="inputMontoAbono" class="form-control form-control-lg text-center fw-bold"></div>
+        <div class="text-start"><label class="form-label small text-muted">Monto del abono</label><input type="number" id="inputMontoAbono" class="form-control form-control-lg text-center fw-bold text-white"></div>
         <input type="hidden" id="idVentaAbono">
       </div>
-      <div class="modal-footer border-0"><button type="button" class="btn btn-light w-100 mb-2" onclick="volverAlPerfil()">Cancelar</button><button type="button" class="btn btn-primary w-100" id="btnAplicarAbono" onclick="guardarAbono()">Aplicar</button></div>
+      <div class="modal-footer border-0"><button type="button" class="btn btn-primary w-100 mb-2" id="btnAplicarAbono" onclick="guardarAbono()">Aplicar Abono</button><button type="button" class="btn btn-light w-100" onclick="volverAlPerfil()">Cancelar</button></div>
     </div>
   </div>
 </div>
@@ -428,8 +487,8 @@
       <div class="modal-header border-0"><h5 class="modal-title text-primary"><i class="bi bi-person-lines-fill me-2"></i> Perfil Cliente</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
       <div class="modal-body p-4 pt-2">
         <div class="row mb-4 pb-3 border-bottom" style="border-color: var(--glass-border) !important;">
-            <div class="col-md-6"><h3 id="perfilNombre" class="text-primary mb-1">---</h3><p id="perfilContacto" class="text-muted mb-0"><i class="bi bi-whatsapp"></i> ---</p></div>
-            <div class="col-md-6 text-md-end mt-3 mt-md-0"><div class="glass-panel p-3 rounded d-inline-block"><h6 class="text-muted small text-uppercase mb-1">Total Comprado</h6><h4 id="perfilTotalComprado" class="text-success mb-0">---</h4></div></div>
+            <div class="col-md-6"><h3 id="perfilNombre" class="text-primary mb-1">---</h3><p id="perfilContacto" class="text-muted mb-0"><i class="bi bi-whatsapp text-success"></i> ---</p></div>
+            <div class="col-md-6 text-md-end mt-3 mt-md-0"><div class="glass-panel p-3 rounded d-inline-block w-100 w-md-auto text-start"><h6 class="text-muted small text-uppercase mb-1">Total Comprado</h6><h4 id="perfilTotalComprado" class="text-success mb-0">---</h4></div></div>
         </div>
         <div class="table-container p-2"><div class="table-responsive"><table class="table table-sm align-middle" style="min-width: 800px;"><thead><tr><th>Fecha</th><th>Prendas</th><th>Valor</th><th>Método</th><th>Saldo</th><th>Abonos</th><th class="text-center">Acción</th></tr></thead><tbody id="perfilListaCompras"></tbody></table></div></div>
       </div>
@@ -484,13 +543,8 @@
     window.togglePassword = function() {
         let input = document.getElementById('loginPassword');
         let icon = document.getElementById('togglePasswordIcon');
-        if (input.type === 'password') {
-            input.type = 'text';
-            icon.classList.replace('bi-eye-slash', 'bi-eye');
-        } else {
-            input.type = 'password';
-            icon.classList.replace('bi-eye', 'bi-eye-slash');
-        }
+        if (input.type === 'password') { input.type = 'text'; icon.classList.replace('bi-eye-slash', 'bi-eye'); } 
+        else { input.type = 'password'; icon.classList.replace('bi-eye', 'bi-eye-slash'); }
     };
 
     window.iniciarSesion = async function(e) {
@@ -501,34 +555,18 @@
         
         if(!email || !pass) return;
 
-        btn.innerText = 'Validando credenciales...'; 
-        btn.disabled = true;
+        btn.innerText = 'Validando...'; btn.disabled = true;
 
-        try {
-            await signInWithEmailAndPassword(auth, email, pass);
-            document.getElementById('loginPassword').value = ''; 
-        } catch (error) {
-            alert("Acceso denegado: Verifica que tu correo y contraseña estén correctos.");
-            console.error(error);
-        } finally {
-            btn.innerText = 'Ingresar al Sistema'; 
-            btn.disabled = false;
-        }
+        try { await signInWithEmailAndPassword(auth, email, pass); document.getElementById('loginPassword').value = ''; 
+        } catch (error) { alert("Acceso denegado: Verifica credenciales."); } finally { btn.innerText = 'Ingresar al Sistema'; btn.disabled = false; }
     };
 
-    window.cerrarSesion = async function() {
-        if(confirm("¿Estás seguro de cerrar la sesión de la Boutique?")) {
-            await signOut(auth);
-            window.location.reload(); 
-        }
-    };
+    window.cerrarSesion = async function() { if(confirm("¿Cerrar sesión de Inspiración Boutique?")) { await signOut(auth); window.location.reload(); } };
 
     function iniciarBaseDeDatos() {
         unsubscribeFirestore = onSnapshot(query(ventasRef, orderBy("timestamp", "desc")), (snapshot) => {
             window.baseVentas = [];
-            snapshot.forEach((documento) => {
-                window.baseVentas.push({ idFirebase: documento.id, ...documento.data() });
-            });
+            snapshot.forEach((documento) => { window.baseVentas.push({ idFirebase: documento.id, ...documento.data() }); });
             render(); 
         });
     }
@@ -538,6 +576,7 @@
         document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         link.classList.add('active');
+        window.scrollTo(0, 0); // Sube la pantalla al cambiar vista en el celular
     };
 
     window.formatearPrendas = function(articulosObj) {
@@ -554,22 +593,14 @@
     };
 
     window.abrirModalNuevaVenta = function() {
-        document.getElementById('formVenta').reset();
-        document.getElementById('editFirebaseId').value = "";
-        document.getElementById('contenedorArticulos').innerHTML = "";
-        
-        document.getElementById('resumenCosto').innerText = "$ 0";
-        document.getElementById('resumenGanancia').innerText = "$ 0";
-        document.getElementById('resumenVenta').innerText = "$ 0";
-        
-        agregarFilaArticulo(); 
-        modalVenta.show();
+        document.getElementById('formVenta').reset(); document.getElementById('editFirebaseId').value = ""; document.getElementById('contenedorArticulos').innerHTML = "";
+        document.getElementById('resumenCosto').innerText = "$ 0"; document.getElementById('resumenGanancia').innerText = "$ 0"; document.getElementById('resumenVenta').innerText = "$ 0";
+        agregarFilaArticulo(); modalVenta.show();
     };
 
     window.agregarFilaArticulo = function(data = null) {
         let container = document.getElementById('contenedorArticulos');
-        let div = document.createElement('div');
-        div.className = 'fila-articulo mb-2 shadow-sm';
+        let div = document.createElement('div'); div.className = 'fila-articulo mb-2 shadow-sm';
         let prod = data ? data.nombre : ''; let cant = data ? data.cantidad : 1;
         let costo = data ? data.costo : ''; let venta = data ? data.precio : '';
 
@@ -580,10 +611,8 @@
                 <div class="col-md-2 col-4"><label class="small text-muted mb-1 text-danger">Costo Ud. $</label><input type="number" class="form-control text-danger i-costo" value="${costo}" required placeholder="0" oninput="calcularTotalesFactura()"></div>
                 <div class="col-md-3 col-4"><label class="small text-muted mb-1 text-success">Venta Ud. $</label><input type="number" class="form-control text-success i-venta" value="${venta}" required placeholder="0" oninput="calcularTotalesFactura()"></div>
                 <div class="col-md-1 col-12 text-end"><button type="button" class="btn btn-outline-danger w-100" onclick="this.parentElement.parentElement.parentElement.remove(); calcularTotalesFactura();" title="Eliminar"><i class="bi bi-trash"></i></button></div>
-            </div>
-        `;
-        container.appendChild(div);
-        calcularTotalesFactura();
+            </div>`;
+        container.appendChild(div); calcularTotalesFactura();
     };
 
     window.calcularTotalesFactura = function() {
@@ -595,10 +624,8 @@
             totalCosto += (cant * costo); totalVenta += (cant * venta);
         });
         
-        let gananciaCalculada = totalVenta - totalCosto;
-        
         document.getElementById('resumenCosto').innerText = "$ " + totalCosto.toLocaleString('es-CO');
-        document.getElementById('resumenGanancia').innerText = "$ " + gananciaCalculada.toLocaleString('es-CO');
+        document.getElementById('resumenGanancia').innerText = "$ " + (totalVenta - totalCosto).toLocaleString('es-CO');
         document.getElementById('resumenVenta').innerText = "$ " + totalVenta.toLocaleString('es-CO');
     };
 
@@ -637,32 +664,26 @@
             if(idFirebase !== "") await updateDoc(doc(db, "ventas", idFirebase), datos);
             else { datos.fecha = new Date().toLocaleDateString('es-CO'); datos.totalAbonado = 0; datos.historialAbonos = []; datos.timestamp = Date.now(); await addDoc(ventasRef, datos); }
             modalVenta.hide();
-        } catch (error) { alert("Error: " + error.message); } 
-        finally { btnGuardar.innerText = "Guardar Factura"; btnGuardar.disabled = false; }
+        } catch (error) { alert("Error: " + error.message); } finally { btnGuardar.innerText = "Guardar Factura"; btnGuardar.disabled = false; }
     };
 
     window.editarVenta = function(idFirebase) {
         let v = window.baseVentas.find(v => v.idFirebase === idFirebase);
         document.getElementById('inputCliente').value = v.cliente; document.getElementById('inputTelefono').value = v.telefono || '';
         document.getElementById('inputNacimiento').value = v.nacimiento || ''; document.getElementById('inputMetodo').value = v.metodo;
-        document.getElementById('editFirebaseId').value = v.idFirebase;
-        document.getElementById('contenedorArticulos').innerHTML = "";
+        document.getElementById('editFirebaseId').value = v.idFirebase; document.getElementById('contenedorArticulos').innerHTML = "";
         if(typeof v.articulos === 'string') agregarFilaArticulo({ nombre: v.articulos, cantidad: 1, costo: v.costoTotal || 0, precio: v.total });
         else if (Array.isArray(v.articulos)) v.articulos.forEach(art => agregarFilaArticulo(art));
         calcularTotalesFactura(); modalVenta.show();
     };
 
-    window.eliminarVenta = async function(idFirebase) {
-        let v = window.baseVentas.find(v => v.idFirebase === idFirebase);
-        if (confirm(`¿Estás seguro de eliminar la venta de ${v.cliente}?`)) await deleteDoc(doc(db, "ventas", idFirebase));
-    };
+    window.eliminarVenta = async function(idFirebase) { let v = window.baseVentas.find(v => v.idFirebase === idFirebase); if (confirm(`¿Estás seguro de eliminar la venta de ${v.cliente}?`)) await deleteDoc(doc(db, "ventas", idFirebase)); };
 
     window.abrirAbono = function(idFirebase) {
         modalPerfil.hide(); let v = window.baseVentas.find(v => v.idFirebase === idFirebase);
         document.getElementById('textoClienteAbono').innerText = v.cliente + " (" + textoPlanoPrendas(v.articulos) + ")";
         document.getElementById('textoSaldoAbono').innerText = "$ " + (v.total - v.totalAbonado).toLocaleString('es-CO');
-        document.getElementById('idVentaAbono').value = idFirebase; document.getElementById('inputMontoAbono').value = "";
-        modalAbono.show();
+        document.getElementById('idVentaAbono').value = idFirebase; document.getElementById('inputMontoAbono').value = ""; modalAbono.show();
     };
 
     window.volverAlPerfil = function() { modalAbono.hide(); setTimeout(() => { modalPerfil.show(); }, 300); }
@@ -675,7 +696,7 @@
             historialActual.push({ fecha: new Date().toLocaleDateString('es-CO'), monto: monto });
             try { await updateDoc(doc(db, "ventas", idFirebase), { totalAbonado: v.totalAbonado + monto, historialAbonos: historialActual });
                 modalAbono.hide(); setTimeout(() => { abrirPerfilCliente(window.clienteLlaveActiva); }, 300);
-            } catch(e) { alert("Error: " + e.message); } finally { btn.innerText = "Aplicar"; btn.disabled = false; }
+            } catch(e) { alert("Error: " + e.message); } finally { btn.innerText = "Aplicar Abono"; btn.disabled = false; }
         }
     };
 
@@ -735,8 +756,7 @@
         
         let ctx = document.getElementById('tendenciaChart').getContext('2d');
         let gradientFill = ctx.createLinearGradient(0, 0, 0, 300);
-        gradientFill.addColorStop(0, "rgba(217, 70, 239, 0.4)");
-        gradientFill.addColorStop(1, "rgba(139, 92, 246, 0.0)");
+        gradientFill.addColorStop(0, "rgba(217, 70, 239, 0.4)"); gradientFill.addColorStop(1, "rgba(139, 92, 246, 0.0)");
 
         window.chartTendencia = new Chart(ctx, { type: 'line', data: { labels: Object.keys(ventasAgrupadasDiarias), datasets: [{ data: Object.values(ventasAgrupadasDiarias), borderColor: '#D946EF', backgroundColor: gradientFill, borderWidth: 3, fill: true, tension: 0.4, pointBackgroundColor: '#8B5CF6', pointRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { callback: function(v) { return '$' + v.toLocaleString(); }, color: '#94A3B8' } }, x: { grid: { display: false }, ticks: { color: '#94A3B8' } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(c) { return ' $' + c.raw.toLocaleString('es-CO'); } } } } } });
     };
@@ -761,16 +781,7 @@
 
             globalIngresos += v.total; globalCostos += (v.costoTotal || 0); globalGanancia += gananciaFila;
 
-            tVentas.innerHTML += `<tr>
-                <td class="text-muted small">${v.fecha}</td>
-                <td><span class="fw-bold text-white">${v.cliente}</span><br><small class="text-muted">${v.telefono || ''}</small></td>
-                <td>${formatearPrendas(v.articulos)}</td>
-                <td class="text-danger small">$ ${(v.costoTotal || 0).toLocaleString('es-CO')}</td>
-                <td class="fw-bold text-white">$ ${v.total.toLocaleString('es-CO')}</td>
-                <td class="fw-bold text-success">$ ${gananciaFila.toLocaleString('es-CO')}</td>
-                <td><span class="badge" style="${badge}">${v.metodo}</span></td>
-                <td class="text-center"><div class="d-flex justify-content-center"><button class="btn btn-sm btn-outline-primary border-0 me-1" onclick="editarVenta('${v.idFirebase}')"><i class="bi bi-pencil-fill"></i></button><button class="btn btn-sm btn-outline-danger border-0" onclick="eliminarVenta('${v.idFirebase}')"><i class="bi bi-trash-fill"></i></button></div></td>
-            </tr>`;
+            tVentas.innerHTML += `<tr><td class="text-muted small">${v.fecha}</td><td><span class="fw-bold text-white">${v.cliente}</span><br><small class="text-muted">${v.telefono || ''}</small></td><td>${formatearPrendas(v.articulos)}</td><td class="text-danger small">$ ${(v.costoTotal || 0).toLocaleString('es-CO')}</td><td class="fw-bold text-white">$ ${v.total.toLocaleString('es-CO')}</td><td class="fw-bold text-success">$ ${gananciaFila.toLocaleString('es-CO')}</td><td><span class="badge" style="${badge}">${v.metodo}</span></td><td class="text-center"><div class="d-flex justify-content-center"><button class="btn btn-sm btn-outline-primary border-0 me-1" onclick="editarVenta('${v.idFirebase}')"><i class="bi bi-pencil-fill"></i></button><button class="btn btn-sm btn-outline-danger border-0" onclick="eliminarVenta('${v.idFirebase}')"><i class="bi bi-trash-fill"></i></button></div></td></tr>`;
 
             let llave = v.telefono ? v.telefono.toString().trim() : v.cliente.toLowerCase();
             if(!clientesCRM[llave]) {
