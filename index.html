@@ -884,14 +884,17 @@
         document.getElementById('badge-ganancias-pct').innerText = pctGananciasGlobal + "%";
         document.getElementById('badge-margen').innerText = pctGananciasGlobal + "%";
 
-        // MENSAJE WHATSAPP DE COBROS Y MEDIOS DE PAGO ACTUALIZADOS
-        let msjMediosDePago = encodeURIComponent(`\n\n🏦 *Medios de Pago:*\n📱 *Nequi:* 3232332218\n🏦 *Daviplata:* 3232332218\n🔑 *Llave:* 3232332218\n\n¿Cuándo podrías pasarnos el comprobante de tu abono? ¡Gracias!`);
-
         Object.values(clientesCRM).forEach(c => {
             tClientes.innerHTML += `<tr><td class="fw-bold text-dark">${c.nombre}</td><td>${c.telefono ? `<i class="bi bi-whatsapp text-success"></i> ${c.telefono}` : '-'}</td><td class="fw-bold text-dark">$ ${c.totalAcumulado.toLocaleString('es-CO')}</td><td class="${c.deudaTotal > 0 ? 'text-danger fw-bold' : 'text-success fw-bold'}">${c.deudaTotal > 0 ? `$ ${c.deudaTotal.toLocaleString('es-CO')}` : 'Sin deuda'}</td><td><button class="btn btn-sm btn-light border fw-bold" onclick="abrirPerfilCliente('${c.llave}')"><i class="bi bi-person me-1"></i> Perfil</button></td></tr>`;
             
             if(c.deudaTotal > 0) {
-                let msjAgrupado = encodeURIComponent(`Hola ${c.nombre}, te saludamos de Inspiración Boutique. 🛍️\n\nTienes un saldo pendiente de *$${c.deudaTotal.toLocaleString('es-CO')}*.\n\n*Detalle:*\n`) + c.prendasPendientes.map(p => `▫️ ${p.descripcion} (Saldo: $${p.saldoDePrenda.toLocaleString('es-CO')})`).join('%0A') + msjMediosDePago;
+                // ARMADO DEL MENSAJE COMPLETO PARA WHATSAPP
+                let msjBase = `Hola ${c.nombre}, te saludamos de Inspiración Boutique. 👗\n\nTienes un saldo pendiente de *$${c.deudaTotal.toLocaleString('es-CO')}*.\n\n*Detalle:*\n`;
+                let msjPrendas = c.prendasPendientes.map(p => `⚫ ${p.descripcion} (Saldo: $${p.saldoDePrenda.toLocaleString('es-CO')})`).join('\n');
+                let msjMediosDePago = `\n\n💵 *Medios de Pago:*\n🔵 *Nequi:* 3232332218\n🔴 *Daviplata:* 3232332218\n🗝️ *Llave:* 3232332218\n\n¿Cuándo podrías pasarnos el comprobante de tu abono? ¡Gracias!`;
+                
+                // CODIFICACIÓN UNIFICADA DE TODO EL MENSAJE
+                let msjAgrupado = encodeURIComponent(msjBase + msjPrendas + msjMediosDePago);
                 
                 tCart.innerHTML += `<tr><td><span class="fw-bold text-dark">${c.nombre}</span><br><small class="text-muted fw-bold">${c.telefono || ''}</small></td><td class="fw-bold text-muted">$ ${c.totalCreditos.toLocaleString('es-CO')}</td><td class="text-danger fw-bold fs-6">$ ${c.deudaTotal.toLocaleString('es-CO')}</td><td><span class="badge" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FCA5A5;">PENDIENTE</span></td><td><div class="d-flex flex-nowrap">${c.telefono ? `<a href="https://wa.me/57${c.telefono}?text=${msjAgrupado}" target="_blank" class="btn btn-sm btn-success me-2 shadow-sm"><i class="bi bi-whatsapp"></i></a>` : ''}<button class="btn btn-sm btn-primary shadow-sm" onclick="abrirPerfilCliente('${c.llave}')"><i class="bi bi-wallet2 me-1"></i> Cobrar</button></div></td></tr>`;
             }
