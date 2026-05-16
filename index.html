@@ -14,16 +14,17 @@
     <style>
         /* === ESTILOS LIGHT MINIMAL LUXURY === */
         :root {
-            --bg-body: #F9FAFB;       /* Gris muy claro, casi blanco */
-            --bg-surface: #FFFFFF;    /* Blanco puro para tarjetas */
-            --border-color: #E5E7EB;  /* Bordes sutiles */
-            --primary: #111827;       /* Negro/Asfalto (Estilo Boutique) */
-            --primary-hover: #374151; /* Gris oscuro para hover */
-            --text-main: #111827;     /* Texto principal oscuro */
-            --text-sec: #6B7280;      /* Texto secundario gris */
+            --bg-body: #F9FAFB;       
+            --bg-surface: #FFFFFF;    
+            --border-color: #E5E7EB;  
+            --primary: #111827;       
+            --primary-hover: #374151; 
+            --text-main: #111827;     
+            --text-sec: #6B7280;      
             --success: #059669;
             --warning: #D97706;
             --danger: #DC2626;
+            --accent-blue: #4F46E5;
             --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
             --radius: 16px;
@@ -38,7 +39,6 @@
             cursor: default;
         }
 
-        /* Sobreescribir colores base Bootstrap para que coincidan con la paleta */
         .text-primary { color: var(--primary) !important; }
         .text-success { color: var(--success) !important; }
         .text-danger { color: var(--danger) !important; }
@@ -48,7 +48,6 @@
         .bg-white { background-color: var(--bg-surface) !important; }
         h1, h2, h3, h4, h5, h6 { font-weight: 600; color: var(--text-main); }
 
-        /* Contenedores y Tarjetas */
         .glass-panel, .login-card, .table-container, .card-kpi, .widget-box, .modal-content {
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
@@ -64,55 +63,28 @@
         .card-kpi, .widget-box { user-select: none; } 
         .card-kpi:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: #D1D5DB; }
 
-        /* Botones (Estilo High-End) */
         .btn-primary { background: var(--primary); border: 1px solid var(--primary); color: white; border-radius: 10px; font-weight: 500; transition: all 0.2s ease; cursor: pointer; padding: 10px 20px; letter-spacing: 0.3px;}
         .btn-primary:hover, .btn-primary:focus { background: var(--primary-hover); border-color: var(--primary-hover); color: white; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(17, 24, 39, 0.2); }
-        
         .btn-outline-primary { color: var(--primary); border: 1.5px solid var(--primary); background: transparent; border-radius: 10px; font-weight: 500; transition: 0.2s; cursor: pointer; }
         .btn-outline-primary:hover { background: var(--bg-body); color: var(--primary); border-color: var(--primary); }
-        
         .btn-outline-dark { color: var(--text-main); border: 1px solid var(--border-color); background: #F3F4F6; border-radius: 10px; font-weight: 500; transition: 0.2s; cursor: pointer; }
         .btn-outline-dark:hover { background: #E5E7EB; color: var(--text-main); border-color: #D1D5DB; }
-        
         .btn-light { background: #F9FAFB; border: 1px solid var(--border-color); color: var(--text-main); border-radius: 10px; font-weight: 500; cursor: pointer;}
         .btn-light:hover { background: #F3F4F6; color: var(--primary); }
-        
         .btn-close { cursor: pointer; }
         .bi-eye-slash { cursor: pointer; }
 
-        /* Inputs y Formularios */
         .form-control, .form-select { 
-            background-color: #F9FAFB !important; 
-            border: 1px solid #D1D5DB; 
-            color: var(--text-main) !important; 
-            border-radius: 10px; 
-            cursor: text; 
-            padding: 12px 15px;
-            font-size: 0.95rem;
-            transition: 0.2s;
+            background-color: #F9FAFB !important; border: 1px solid #D1D5DB; color: var(--text-main) !important; 
+            border-radius: 10px; cursor: text; padding: 12px 15px; font-size: 0.95rem; transition: 0.2s;
         }
         .form-select { cursor: pointer; }
-        .form-control:focus, .form-select:focus { 
-            background-color: #FFFFFF !important; 
-            border-color: var(--primary); 
-            box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1); 
-        }
+        .form-control:focus, .form-select:focus { background-color: #FFFFFF !important; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1); }
         ::placeholder { color: #9CA3AF !important; opacity: 1 !important; }
         .input-group-text { background: #FFFFFF !important; color: var(--text-sec) !important; border: 1px solid #D1D5DB; border-radius: 10px; }
 
-        /* === BARRA LATERAL (Desktop) === */
         .sidebar { background: #FFFFFF; border-right: 1px solid var(--border-color); min-height: 100vh; user-select: none; transition: all 0.3s ease; }
-        .nav-link { 
-            color: var(--text-sec); 
-            padding: 12px 20px; 
-            border-radius: 10px; 
-            transition: 0.2s; 
-            margin-bottom: 6px; 
-            cursor: pointer; 
-            display: flex;
-            align-items: center;
-            font-weight: 500;
-        }
+        .nav-link { color: var(--text-sec); padding: 12px 20px; border-radius: 10px; transition: 0.2s; margin-bottom: 6px; cursor: pointer; display: flex; align-items: center; font-weight: 500; }
         .nav-link i { font-size: 1.25rem; margin-right: 14px; opacity: 0.7; transition: 0.2s;}
         .nav-link:hover { background: #F3F4F6; color: var(--primary); }
         .nav-link.active { background: var(--primary); color: white; font-weight: 600; box-shadow: 0 4px 10px rgba(17, 24, 39, 0.2);}
@@ -121,81 +93,43 @@
         
         .mobile-topbar { display: none; }
 
-        /* Tablas */
         .table { color: var(--text-main); cursor: default; margin-bottom: 0; }
         .table thead th { background: transparent !important; color: var(--text-sec) !important; border-bottom: 2px solid var(--border-color); text-transform: uppercase; font-size: 12px; font-weight: 600; letter-spacing: 0.5px;}
         .table td { border-color: var(--border-color); background: transparent !important; padding: 16px 10px; vertical-align: middle;}
         .table-hover tbody tr { transition: 0.2s; }
         .table-hover tbody tr:hover td { background-color: #F9FAFB !important; }
-        
         .fila-articulo { background: #FFFFFF; border: 1px solid var(--border-color); padding: 15px; border-radius: 12px;}
         
-        /* Badges */
         .badge { font-weight: 600; padding: 6px 10px; border-radius: 8px; letter-spacing: 0.2px; }
         .badge.bg-light.text-dark { background: #F3F4F6 !important; color: var(--text-main) !important; border: 1px solid #E5E7EB !important; }
         .widget-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; color: var(--text-sec); text-transform: uppercase; }
 
-        /* Vistas y Animaciones */
         .section-view { display: none; }
         .section-view.active { display: block; animation: fadeIn 0.4s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; cursor: pointer; }
         ::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
 
-        /* =========================================
-           DISEÑO RESPONSIVE MÓVIL (APP NATIVA)
-           ========================================= */
         @media (max-width: 767.98px) {
             .login-card { padding: 30px 20px; width: 92%; }
-            
-            /* Topbar Móvil */
-            .mobile-topbar { 
-                display: flex !important; justify-content: space-between; align-items: center; 
-                padding: 15px 20px; background: #FFFFFF; 
-                position: sticky; top: 0; z-index: 1040; border-bottom: 1px solid var(--border-color); 
-                box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            }
-            
-            /* Bottom Navigation Bar */
-            .sidebar { 
-                position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; min-height: 75px; 
-                padding: 0 !important; border-radius: 24px 24px 0 0; z-index: 1050; 
-                flex-direction: row !important; align-items: center; justify-content: center; 
-                box-shadow: 0 -4px 20px rgba(0,0,0,0.06); 
-                background: #FFFFFF;
-                border-top: 1px solid var(--border-color);
-                border-right: none;
-                border-bottom: none;
-            }
-            
+            .mobile-topbar { display: flex !important; justify-content: space-between; align-items: center; padding: 15px 20px; background: #FFFFFF; position: sticky; top: 0; z-index: 1040; border-bottom: 1px solid var(--border-color); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+            .sidebar { position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; min-height: 75px; padding: 0 !important; border-radius: 24px 24px 0 0; z-index: 1050; flex-direction: row !important; align-items: center; justify-content: center; box-shadow: 0 -4px 20px rgba(0,0,0,0.06); background: #FFFFFF; border-top: 1px solid var(--border-color); border-right: none; border-bottom: none; }
             .logo-container { display: none !important; } 
-            
             .nav { flex-direction: row !important; width: 100%; justify-content: space-evenly; align-items: center; margin: 0; padding: 0 5px; overflow: visible;}
             .nav-item { margin: 0; }
-            .nav-link { 
-                flex-direction: column; padding: 8px 10px; margin: 0; font-size: 0.65rem; 
-                border-radius: 12px; font-weight: 500; align-items: center; color: #9CA3AF; 
-                background: transparent !important; box-shadow: none !important;
-            }
+            .nav-link { flex-direction: column; padding: 8px 10px; margin: 0; font-size: 0.65rem; border-radius: 12px; font-weight: 500; align-items: center; color: #9CA3AF; background: transparent !important; box-shadow: none !important; }
             .nav-link i { margin-right: 0; margin-bottom: 3px; font-size: 1.35rem; opacity: 1; transition: 0.2s;}
             .nav-link.active { color: var(--primary) !important; font-weight: 600;}
             .nav-link.active i { transform: translateY(-3px); color: var(--primary) !important; } 
-            
-            /* Ajustes de Contenido */
             .main-content { padding: 20px 15px 95px 15px !important; } 
             .card-kpi { padding: 20px; }
             .table-container { padding: 15px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: none;}
-            
-            /* Widgets en columna en móvil */
             .widget-header { flex-direction: column; gap: 10px !important; align-items: stretch; }
             .widget-box { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 15px !important;}
             .widget-box .widget-label { margin-bottom: 0 !important; }
-            
-            /* Ajustes Modales */
             .modal-content { border-radius: 20px; }
             .modal-body { padding: 20px 15px !important; }
             .modal-header { padding: 15px 20px; }
@@ -287,11 +221,27 @@
                     </div>
                 </div>
 
-                <div class="row mb-4 g-3 g-md-4">
-                    <div class="col-xl-3 col-md-6 col-12"><div class="card-kpi p-4"><div class="d-flex justify-content-between align-items-start"><div><h6 class="widget-label mb-2">Ingresos</h6><h3 id="kpi-ingresos" class="text-dark mb-0">$ 0</h3></div><div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; background: #F3F4F6; color: var(--primary);"><i class="bi bi-cash-stack fs-5"></i></div></div></div></div>
-                    <div class="col-xl-3 col-md-6 col-12"><div class="card-kpi p-4"><div class="d-flex justify-content-between align-items-start"><div><h6 class="widget-label mb-2">Costos</h6><h3 id="kpi-costos" class="text-dark mb-0">$ 0</h3></div><div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; background: #FEF2F2; color: var(--danger);"><i class="bi bi-box-seam fs-5"></i></div></div></div></div>
-                    <div class="col-xl-3 col-md-6 col-12"><div class="card-kpi p-4"><div class="d-flex justify-content-between align-items-start"><div><h6 class="widget-label mb-2">Ganancia Neta</h6><h3 id="kpi-ganancias" class="mb-0 text-success">$ 0</h3></div><div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; background: #ECFDF5; color: var(--success);"><i class="bi bi-graph-up-arrow fs-5"></i></div></div></div></div>
-                    <div class="col-xl-3 col-md-6 col-12"><div class="card-kpi p-4"><div class="d-flex justify-content-between align-items-start"><div><h6 class="widget-label mb-2">Transacciones</h6><h3 id="kpi-cantidad" class="mb-0 text-dark">0</h3></div><div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; background: #FFFBEB; color: var(--warning);"><i class="bi bi-bag-check fs-5"></i></div></div></div></div>
+                <div class="row mb-4 g-3 g-md-4 row-cols-1 row-cols-md-3 row-cols-xl-5">
+                    <div class="col"><div class="card-kpi p-3 h-100"><div class="d-flex justify-content-between align-items-start"><div><h6 class="widget-label mb-2">Ingresos</h6><h4 id="kpi-ingresos" class="text-dark mb-0">$ 0</h4></div><div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #F3F4F6; color: var(--primary);"><i class="bi bi-cash-stack fs-5"></i></div></div></div></div>
+                    
+                    <div class="col">
+                        <div class="card-kpi p-3 h-100" style="border: 2px solid #EEF2FF; background: #FAFAFF;">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="widget-label mb-1" style="color: var(--accent-blue);">Recaudo Real</h6>
+                                    <h4 id="kpi-recaudo" class="text-dark mb-1">$ 0</h4>
+                                    <div class="small fw-bold" style="color: var(--accent-blue);"><span id="kpi-recaudo-pct">0%</span> <span class="text-muted fw-normal" style="font-size: 0.7rem;">del total</span></div>
+                                </div>
+                                <div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #E0E7FF; color: var(--accent-blue);">
+                                    <i class="bi bi-safe fs-5"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col"><div class="card-kpi p-3 h-100"><div class="d-flex justify-content-between align-items-start"><div><h6 class="widget-label mb-2">Costos</h6><h4 id="kpi-costos" class="text-dark mb-0">$ 0</h4></div><div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #FEF2F2; color: var(--danger);"><i class="bi bi-box-seam fs-5"></i></div></div></div></div>
+                    <div class="col"><div class="card-kpi p-3 h-100"><div class="d-flex justify-content-between align-items-start"><div><h6 class="widget-label mb-2">Ganancia Neta</h6><h4 id="kpi-ganancias" class="mb-0 text-success">$ 0</h4></div><div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #ECFDF5; color: var(--success);"><i class="bi bi-graph-up-arrow fs-5"></i></div></div></div></div>
+                    <div class="col"><div class="card-kpi p-3 h-100"><div class="d-flex justify-content-between align-items-start"><div><h6 class="widget-label mb-2">Transacciones</h6><h4 id="kpi-cantidad" class="mb-0 text-dark">0</h4></div><div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #FFFBEB; color: var(--warning);"><i class="bi bi-bag-check fs-5"></i></div></div></div></div>
                 </div>
 
                 <div class="row mb-4 g-3 g-md-4">
@@ -319,7 +269,7 @@
                 <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3">
                     <div>
                         <h2 class="mb-1">Historial de Ventas</h2>
-                        <p class="text-muted small fw-medium mb-0">Registro de todas las transacciones</p>
+                        <p class="text-muted small fw-medium mb-0">Registro histórico general</p>
                     </div>
                     
                     <button class="btn btn-primary px-4 py-2 w-100 d-md-none" onclick="abrirModalNuevaVenta()">
@@ -331,6 +281,15 @@
                             <div class="widget-label mb-1">Ingresos</div>
                             <div class="fs-5 fw-bold text-dark" id="badge-ingresos">$ 0</div>
                         </div>
+                        
+                        <div class="widget-box p-3 px-4 border shadow-sm" style="border-bottom: 3px solid var(--accent-blue) !important; background: #FAFAFF;">
+                            <div class="widget-label mb-1" style="color: var(--accent-blue);">Recaudo Total</div>
+                            <div class="d-flex align-items-baseline gap-2">
+                                <div class="fs-5 fw-bold text-dark" id="badge-recaudo">$ 0</div>
+                            </div>
+                            <div class="small fw-bold mt-1" style="color: var(--accent-blue); font-size: 0.75rem;"><span id="badge-recaudo-pct">0%</span> <span class="text-muted fw-normal">del total</span></div>
+                        </div>
+
                         <div class="widget-box p-3 px-4 border shadow-sm">
                             <div class="widget-label mb-1">Costos</div>
                             <div class="fs-5 text-danger fw-bold" id="badge-costos">$ 0</div>
@@ -764,24 +723,58 @@
         else { let hoyDate = new Date(); añoFiltro = hoyDate.getFullYear(); mesFiltro = hoyDate.getMonth(); document.getElementById('filtroMesDashboard').value = `${añoFiltro}-${(mesFiltro + 1).toString().padStart(2, '0')}`; }
 
         let sumaMes = 0; let costosMes = 0; let gananciasMes = 0; let cantidadVentas = 0; let carteraGlobal = 0; let ventasAgrupadasDiarias = {};
+        let recaudoMes = 0; // NUEVA VARIABLE PARA RECAUDO DEL MES
         let diasEnMes = new Date(añoFiltro, mesFiltro + 1, 0).getDate();
         for(let i=1; i<=diasEnMes; i++) { ventasAgrupadasDiarias[i] = 0; }
 
         window.baseVentas.forEach(v => {
             if(v.metodo.includes('Crédito')) carteraGlobal += (v.total - (v.totalAbonado || 0));
+            
             let fechaVenta = new Date(v.timestamp || Date.now()); 
-            if (fechaVenta.getFullYear() === añoFiltro && fechaVenta.getMonth() === mesFiltro) {
-                sumaMes += v.total; costosMes += (v.costoTotal || 0); gananciasMes += (v.ganancia !== undefined ? v.ganancia : v.total);
-                cantidadVentas++; ventasAgrupadasDiarias[fechaVenta.getDate()] += v.total;
+            let esDelMes = (fechaVenta.getFullYear() === añoFiltro && fechaVenta.getMonth() === mesFiltro);
+
+            if (esDelMes) {
+                sumaMes += v.total; 
+                costosMes += (v.costoTotal || 0); 
+                gananciasMes += (v.ganancia !== undefined ? v.ganancia : v.total);
+                cantidadVentas++; 
+                ventasAgrupadasDiarias[fechaVenta.getDate()] += v.total;
+                
+                // LÓGICA DE RECAUDO: Sumar ventas del mes que NO son crédito
+                if (!v.metodo.includes('Crédito')) {
+                    recaudoMes += v.total;
+                }
+            }
+
+            // LÓGICA DE RECAUDO: Sumar todos los abonos realizados EN ESTE MES (sin importar cuándo fue la venta)
+            if (v.historialAbonos && v.historialAbonos.length > 0) {
+                v.historialAbonos.forEach(abono => {
+                    let partesFecha = abono.fecha.split('/'); // Asume formato DD/MM/YYYY o D/M/YYYY
+                    if (partesFecha.length === 3) {
+                        let mesAbono = parseInt(partesFecha[1]) - 1;
+                        let añoAbono = parseInt(partesFecha[2]);
+                        if (añoAbono === añoFiltro && mesAbono === mesFiltro) {
+                            recaudoMes += abono.monto;
+                        }
+                    }
+                });
             }
         });
 
-        document.getElementById('kpi-ingresos').innerText = "$ " + sumaMes.toLocaleString('es-CO'); document.getElementById('kpi-costos').innerText = "$ " + costosMes.toLocaleString('es-CO');
-        document.getElementById('kpi-ganancias').innerText = "$ " + gananciasMes.toLocaleString('es-CO'); document.getElementById('kpi-cantidad').innerText = cantidadVentas;
+        // CALCULO PORCENTAJE DEL MES
+        let pctRecaudoMes = sumaMes > 0 ? ((recaudoMes / sumaMes) * 100).toFixed(1) : 0;
+
+        document.getElementById('kpi-ingresos').innerText = "$ " + sumaMes.toLocaleString('es-CO'); 
+        document.getElementById('kpi-costos').innerText = "$ " + costosMes.toLocaleString('es-CO');
+        document.getElementById('kpi-ganancias').innerText = "$ " + gananciasMes.toLocaleString('es-CO'); 
+        document.getElementById('kpi-cantidad').innerText = cantidadVentas;
         document.getElementById('kpi-cartera').innerText = "$ " + carteraGlobal.toLocaleString('es-CO');
+        
+        // ACTUALIZAR NUEVO WIDGET EN DASHBOARD
+        document.getElementById('kpi-recaudo').innerText = "$ " + recaudoMes.toLocaleString('es-CO');
+        document.getElementById('kpi-recaudo-pct').innerText = pctRecaudoMes + "%";
 
         if (window.chartTendencia) window.chartTendencia.destroy(); 
-        
         let ctx = document.getElementById('tendenciaChart').getContext('2d');
         let gradientFill = ctx.createLinearGradient(0, 0, 0, 300);
         gradientFill.addColorStop(0, "rgba(17, 24, 39, 0.15)"); gradientFill.addColorStop(1, "rgba(17, 24, 39, 0.0)");
@@ -801,7 +794,8 @@
         tVentas.innerHTML = ""; tCart.innerHTML = ""; tCumples.innerHTML = ""; tClientes.innerHTML = ""; datalist.innerHTML = "";
 
         let mesActual = new Date().getMonth() + 1; let cumpleaneros = []; let clientesCRM = {}; window.clientesDirectorio = []; 
-        let globalIngresos = 0; let globalCostos = 0; let globalGanancia = 0;
+        let globalIngresos = 0; let globalCostos = 0; let globalGanancia = 0; 
+        let globalRecaudo = 0; // NUEVA VARIABLE RECAUDO GLOBAL
 
         window.baseVentas.forEach(v => {
             let saldo = v.total - v.totalAbonado; 
@@ -809,6 +803,12 @@
             let gananciaFila = v.ganancia !== undefined ? v.ganancia : (v.total - (v.costoTotal || 0));
 
             globalIngresos += v.total; globalCostos += (v.costoTotal || 0); globalGanancia += gananciaFila;
+
+            // LÓGICA DE RECAUDO GLOBAL (Para la vista Historial Ventas)
+            if (!v.metodo.includes('Crédito')) { globalRecaudo += v.total; }
+            if (v.historialAbonos && v.historialAbonos.length > 0) {
+                v.historialAbonos.forEach(abono => { globalRecaudo += abono.monto; });
+            }
 
             tVentas.innerHTML += `<tr><td class="text-muted fw-bold small">${v.fecha}</td><td><span class="fw-bold text-dark">${v.cliente}</span><br><small class="text-muted">${v.telefono || ''}</small></td><td>${formatearPrendas(v.articulos)}</td><td class="text-danger fw-bold small">$ ${(v.costoTotal || 0).toLocaleString('es-CO')}</td><td class="fw-bold text-dark">$ ${v.total.toLocaleString('es-CO')}</td><td class="fw-bold text-success">$ ${gananciaFila.toLocaleString('es-CO')}</td><td><span class="badge" style="${badge}">${v.metodo}</span></td><td class="text-center"><div class="d-flex justify-content-center"><button class="btn btn-sm btn-light border me-1" onclick="editarVenta('${v.idFirebase}')"><i class="bi bi-pencil-fill text-muted"></i></button><button class="btn btn-sm btn-light border" onclick="eliminarVenta('${v.idFirebase}')"><i class="bi bi-trash-fill text-danger"></i></button></div></td></tr>`;
 
@@ -831,8 +831,14 @@
         document.getElementById('badge-ingresos').innerText = "$ " + globalIngresos.toLocaleString('es-CO');
         document.getElementById('badge-costos').innerText = "$ " + globalCostos.toLocaleString('es-CO');
         document.getElementById('badge-ganancias').innerText = "$ " + globalGanancia.toLocaleString('es-CO');
+        
         let porcentajeMargen = globalIngresos > 0 ? ((globalGanancia / globalIngresos) * 100).toFixed(1) : 0;
         document.getElementById('badge-margen').innerText = porcentajeMargen + "%";
+
+        // ACTUALIZAR NUEVO WIDGET EN HISTORIAL VENTAS (Global)
+        let porcentajeRecaudoGlobal = globalIngresos > 0 ? ((globalRecaudo / globalIngresos) * 100).toFixed(1) : 0;
+        document.getElementById('badge-recaudo').innerText = "$ " + globalRecaudo.toLocaleString('es-CO');
+        document.getElementById('badge-recaudo-pct').innerText = porcentajeRecaudoGlobal + "%";
 
         Object.values(clientesCRM).forEach(c => {
             tClientes.innerHTML += `<tr><td class="fw-bold text-dark">${c.nombre}</td><td>${c.telefono ? `<i class="bi bi-whatsapp text-success"></i> ${c.telefono}` : '-'}</td><td class="fw-bold text-dark">$ ${c.totalAcumulado.toLocaleString('es-CO')}</td><td class="${c.deudaTotal > 0 ? 'text-danger fw-bold' : 'text-success fw-bold'}">${c.deudaTotal > 0 ? `$ ${c.deudaTotal.toLocaleString('es-CO')}` : 'Sin deuda'}</td><td><button class="btn btn-sm btn-light border fw-bold" onclick="abrirPerfilCliente('${c.llave}')"><i class="bi bi-person me-1"></i> Perfil</button></td></tr>`;
