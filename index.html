@@ -211,7 +211,7 @@
                 <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3">
                     <div>
                         <h2 class="mb-1">Resumen del Negocio</h2>
-                        <p class="text-muted small fw-medium mb-0">Métricas clave y rendimiento</p>
+                        <p class="text-muted small fw-medium mb-0">Métricas clave y rendimiento mensual</p>
                     </div>
                     <div class="d-flex gap-2">
                         <div class="d-flex align-items-center gap-2 px-3 py-2 rounded shadow-sm bg-white border">
@@ -222,7 +222,18 @@
                 </div>
 
                 <div class="row mb-4 g-3 g-md-4 row-cols-1 row-cols-md-3 row-cols-xl-5">
-                    <div class="col"><div class="card-kpi p-3 h-100"><div class="d-flex justify-content-between align-items-start"><div><h6 class="widget-label mb-2">Ingresos</h6><h4 id="kpi-ingresos" class="text-dark mb-0">$ 0</h4></div><div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #F3F4F6; color: var(--primary);"><i class="bi bi-cash-stack fs-5"></i></div></div></div></div>
+                    <div class="col">
+                        <div class="card-kpi p-3 h-100">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="widget-label mb-2">Ingresos</h6>
+                                    <h4 id="kpi-ingresos" class="text-dark mb-1">$ 0</h4>
+                                    <div class="small fw-bold text-muted"><span id="kpi-ingresos-pct">100%</span> <span class="fw-normal" style="font-size: 0.7rem;">del total</span></div>
+                                </div>
+                                <div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #F3F4F6; color: var(--primary);"><i class="bi bi-cash-stack fs-5"></i></div>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="col">
                         <div class="card-kpi p-3 h-100" style="border: 2px solid #EEF2FF; background: #FAFAFF;">
@@ -232,16 +243,49 @@
                                     <h4 id="kpi-recaudo" class="text-dark mb-1">$ 0</h4>
                                     <div class="small fw-bold" style="color: var(--accent-blue);"><span id="kpi-recaudo-pct">0%</span> <span class="text-muted fw-normal" style="font-size: 0.7rem;">del total</span></div>
                                 </div>
-                                <div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #E0E7FF; color: var(--accent-blue);">
-                                    <i class="bi bi-safe fs-5"></i>
-                                </div>
+                                <div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #E0E7FF; color: var(--accent-blue);"><i class="bi bi-safe fs-5"></i></div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col"><div class="card-kpi p-3 h-100"><div class="d-flex justify-content-between align-items-start"><div><h6 class="widget-label mb-2">Costos</h6><h4 id="kpi-costos" class="text-dark mb-0">$ 0</h4></div><div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #FEF2F2; color: var(--danger);"><i class="bi bi-box-seam fs-5"></i></div></div></div></div>
-                    <div class="col"><div class="card-kpi p-3 h-100"><div class="d-flex justify-content-between align-items-start"><div><h6 class="widget-label mb-2">Ganancia Neta</h6><h4 id="kpi-ganancias" class="mb-0 text-success">$ 0</h4></div><div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #ECFDF5; color: var(--success);"><i class="bi bi-graph-up-arrow fs-5"></i></div></div></div></div>
-                    <div class="col"><div class="card-kpi p-3 h-100"><div class="d-flex justify-content-between align-items-start"><div><h6 class="widget-label mb-2">Transacciones</h6><h4 id="kpi-cantidad" class="mb-0 text-dark">0</h4></div><div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #FFFBEB; color: var(--warning);"><i class="bi bi-bag-check fs-5"></i></div></div></div></div>
+                    <div class="col">
+                        <div class="card-kpi p-3 h-100">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="widget-label mb-2">Costos</h6>
+                                    <h4 id="kpi-costos" class="text-dark mb-1">$ 0</h4>
+                                    <div class="small fw-bold text-danger"><span id="kpi-costos-pct">0%</span> <span class="text-muted fw-normal" style="font-size: 0.7rem;">del total</span></div>
+                                </div>
+                                <div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #FEF2F2; color: var(--danger);"><i class="bi bi-box-seam fs-5"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card-kpi p-3 h-100">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="widget-label mb-2">Ganancia Neta</h6>
+                                    <h4 id="kpi-ganancias" class="text-dark mb-1">$ 0</h4>
+                                    <div class="small fw-bold text-success"><span id="kpi-ganancias-pct">0%</span> <span class="text-muted fw-normal" style="font-size: 0.7rem;">del total</span></div>
+                                </div>
+                                <div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #ECFDF5; color: var(--success);"><i class="bi bi-graph-up-arrow fs-5"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card-kpi p-3 h-100">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="widget-label mb-2">Transacciones</h6>
+                                    <h4 id="kpi-cantidad" class="text-dark mb-1">0</h4>
+                                    <div class="small fw-bold text-muted"><span class="fw-normal" style="font-size: 0.7rem;">en este mes</span></div>
+                                </div>
+                                <div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #FFFBEB; color: var(--warning);"><i class="bi bi-bag-check fs-5"></i></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row mb-4 g-3 g-md-4">
@@ -269,7 +313,7 @@
                 <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3">
                     <div>
                         <h2 class="mb-1">Historial de Ventas</h2>
-                        <p class="text-muted small fw-medium mb-0">Registro histórico general</p>
+                        <p class="text-muted small fw-medium mb-0">Registro histórico global</p>
                     </div>
                     
                     <button class="btn btn-primary px-4 py-2 w-100 d-md-none" onclick="abrirModalNuevaVenta()">
@@ -280,27 +324,31 @@
                         <div class="widget-box p-3 px-4 border shadow-sm">
                             <div class="widget-label mb-1">Ingresos</div>
                             <div class="fs-5 fw-bold text-dark" id="badge-ingresos">$ 0</div>
+                            <div class="small fw-bold mt-1 text-muted" style="font-size: 0.75rem;"><span id="badge-ingresos-pct">100%</span> <span class="fw-normal">del total</span></div>
                         </div>
                         
                         <div class="widget-box p-3 px-4 border shadow-sm" style="border-bottom: 3px solid var(--accent-blue) !important; background: #FAFAFF;">
                             <div class="widget-label mb-1" style="color: var(--accent-blue);">Recaudo Total</div>
-                            <div class="d-flex align-items-baseline gap-2">
-                                <div class="fs-5 fw-bold text-dark" id="badge-recaudo">$ 0</div>
-                            </div>
+                            <div class="fs-5 fw-bold text-dark" id="badge-recaudo">$ 0</div>
                             <div class="small fw-bold mt-1" style="color: var(--accent-blue); font-size: 0.75rem;"><span id="badge-recaudo-pct">0%</span> <span class="text-muted fw-normal">del total</span></div>
                         </div>
 
                         <div class="widget-box p-3 px-4 border shadow-sm">
                             <div class="widget-label mb-1">Costos</div>
                             <div class="fs-5 text-danger fw-bold" id="badge-costos">$ 0</div>
+                            <div class="small fw-bold mt-1 text-danger" style="font-size: 0.75rem;"><span id="badge-costos-pct">0%</span> <span class="text-muted fw-normal">del total</span></div>
                         </div>
+                        
                         <div class="widget-box p-3 px-4 border shadow-sm">
                             <div class="widget-label mb-1">Ganancia</div>
                             <div class="fs-5 text-success fw-bold" id="badge-ganancias">$ 0</div>
+                            <div class="small fw-bold mt-1 text-success" style="font-size: 0.75rem;"><span id="badge-ganancias-pct">0%</span> <span class="text-muted fw-normal">del total</span></div>
                         </div>
+                        
                         <div class="widget-box p-3 px-4 border shadow-sm" style="background: #F3F4F6;">
-                            <div class="widget-label mb-1">Margen</div>
+                            <div class="widget-label mb-1">Margen %</div>
                             <div class="fs-5 text-dark fw-bold" id="badge-margen">0%</div>
+                            <div class="small fw-bold mt-1 text-muted" style="font-size: 0.75rem;"><span>Rendimiento</span></div>
                         </div>
                     </div>
 
@@ -325,7 +373,7 @@
                 <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3">
                     <div>
                         <h2 class="mb-1">Control de Cobros</h2>
-                        <p class="text-muted small fw-medium mb-0">Gestión de créditos y saldos pendientes</p>
+                        <p class="text-muted small fw-medium mb-0">Gestión de créditos y envío de recordatorios</p>
                     </div>
                     <div class="d-flex gap-2 w-100 flex-md-nowrap" style="max-width: 350px;">
                         <div class="input-group shadow-sm">
@@ -723,7 +771,7 @@
         else { let hoyDate = new Date(); añoFiltro = hoyDate.getFullYear(); mesFiltro = hoyDate.getMonth(); document.getElementById('filtroMesDashboard').value = `${añoFiltro}-${(mesFiltro + 1).toString().padStart(2, '0')}`; }
 
         let sumaMes = 0; let costosMes = 0; let gananciasMes = 0; let cantidadVentas = 0; let carteraGlobal = 0; let ventasAgrupadasDiarias = {};
-        let recaudoMes = 0; // NUEVA VARIABLE PARA RECAUDO DEL MES
+        let recaudoMes = 0; 
         let diasEnMes = new Date(añoFiltro, mesFiltro + 1, 0).getDate();
         for(let i=1; i<=diasEnMes; i++) { ventasAgrupadasDiarias[i] = 0; }
 
@@ -740,16 +788,12 @@
                 cantidadVentas++; 
                 ventasAgrupadasDiarias[fechaVenta.getDate()] += v.total;
                 
-                // LÓGICA DE RECAUDO: Sumar ventas del mes que NO son crédito
-                if (!v.metodo.includes('Crédito')) {
-                    recaudoMes += v.total;
-                }
+                if (!v.metodo.includes('Crédito')) { recaudoMes += v.total; }
             }
 
-            // LÓGICA DE RECAUDO: Sumar todos los abonos realizados EN ESTE MES (sin importar cuándo fue la venta)
             if (v.historialAbonos && v.historialAbonos.length > 0) {
                 v.historialAbonos.forEach(abono => {
-                    let partesFecha = abono.fecha.split('/'); // Asume formato DD/MM/YYYY o D/M/YYYY
+                    let partesFecha = abono.fecha.split('/'); 
                     if (partesFecha.length === 3) {
                         let mesAbono = parseInt(partesFecha[1]) - 1;
                         let añoAbono = parseInt(partesFecha[2]);
@@ -761,16 +805,18 @@
             }
         });
 
-        // CALCULO PORCENTAJE DEL MES
+        // CALCULOS DE PORCENTAJES DASHBOARD
         let pctRecaudoMes = sumaMes > 0 ? ((recaudoMes / sumaMes) * 100).toFixed(1) : 0;
+        let pctCostosMes = sumaMes > 0 ? ((costosMes / sumaMes) * 100).toFixed(1) : 0;
+        let pctGananciasMes = sumaMes > 0 ? ((gananciasMes / sumaMes) * 100).toFixed(1) : 0;
 
         document.getElementById('kpi-ingresos').innerText = "$ " + sumaMes.toLocaleString('es-CO'); 
         document.getElementById('kpi-costos').innerText = "$ " + costosMes.toLocaleString('es-CO');
+        document.getElementById('kpi-costos-pct').innerText = pctCostosMes + "%";
         document.getElementById('kpi-ganancias').innerText = "$ " + gananciasMes.toLocaleString('es-CO'); 
+        document.getElementById('kpi-ganancias-pct').innerText = pctGananciasMes + "%";
         document.getElementById('kpi-cantidad').innerText = cantidadVentas;
         document.getElementById('kpi-cartera').innerText = "$ " + carteraGlobal.toLocaleString('es-CO');
-        
-        // ACTUALIZAR NUEVO WIDGET EN DASHBOARD
         document.getElementById('kpi-recaudo').innerText = "$ " + recaudoMes.toLocaleString('es-CO');
         document.getElementById('kpi-recaudo-pct').innerText = pctRecaudoMes + "%";
 
@@ -794,8 +840,7 @@
         tVentas.innerHTML = ""; tCart.innerHTML = ""; tCumples.innerHTML = ""; tClientes.innerHTML = ""; datalist.innerHTML = "";
 
         let mesActual = new Date().getMonth() + 1; let cumpleaneros = []; let clientesCRM = {}; window.clientesDirectorio = []; 
-        let globalIngresos = 0; let globalCostos = 0; let globalGanancia = 0; 
-        let globalRecaudo = 0; // NUEVA VARIABLE RECAUDO GLOBAL
+        let globalIngresos = 0; let globalCostos = 0; let globalGanancia = 0; let globalRecaudo = 0; 
 
         window.baseVentas.forEach(v => {
             let saldo = v.total - v.totalAbonado; 
@@ -804,7 +849,6 @@
 
             globalIngresos += v.total; globalCostos += (v.costoTotal || 0); globalGanancia += gananciaFila;
 
-            // LÓGICA DE RECAUDO GLOBAL (Para la vista Historial Ventas)
             if (!v.metodo.includes('Crédito')) { globalRecaudo += v.total; }
             if (v.historialAbonos && v.historialAbonos.length > 0) {
                 v.historialAbonos.forEach(abono => { globalRecaudo += abono.monto; });
@@ -828,22 +872,29 @@
             }
         });
 
-        document.getElementById('badge-ingresos').innerText = "$ " + globalIngresos.toLocaleString('es-CO');
-        document.getElementById('badge-costos').innerText = "$ " + globalCostos.toLocaleString('es-CO');
-        document.getElementById('badge-ganancias').innerText = "$ " + globalGanancia.toLocaleString('es-CO');
-        
-        let porcentajeMargen = globalIngresos > 0 ? ((globalGanancia / globalIngresos) * 100).toFixed(1) : 0;
-        document.getElementById('badge-margen').innerText = porcentajeMargen + "%";
+        // CÁLCULOS PORCENTAJES GLOBALES (Para Ventas)
+        let pctRecaudoGlobal = globalIngresos > 0 ? ((globalRecaudo / globalIngresos) * 100).toFixed(1) : 0;
+        let pctCostosGlobal = globalIngresos > 0 ? ((globalCostos / globalIngresos) * 100).toFixed(1) : 0;
+        let pctGananciasGlobal = globalIngresos > 0 ? ((globalGanancia / globalIngresos) * 100).toFixed(1) : 0;
 
-        // ACTUALIZAR NUEVO WIDGET EN HISTORIAL VENTAS (Global)
-        let porcentajeRecaudoGlobal = globalIngresos > 0 ? ((globalRecaudo / globalIngresos) * 100).toFixed(1) : 0;
+        document.getElementById('badge-ingresos').innerText = "$ " + globalIngresos.toLocaleString('es-CO');
         document.getElementById('badge-recaudo').innerText = "$ " + globalRecaudo.toLocaleString('es-CO');
-        document.getElementById('badge-recaudo-pct').innerText = porcentajeRecaudoGlobal + "%";
+        document.getElementById('badge-recaudo-pct').innerText = pctRecaudoGlobal + "%";
+        document.getElementById('badge-costos').innerText = "$ " + globalCostos.toLocaleString('es-CO');
+        document.getElementById('badge-costos-pct').innerText = pctCostosGlobal + "%";
+        document.getElementById('badge-ganancias').innerText = "$ " + globalGanancia.toLocaleString('es-CO');
+        document.getElementById('badge-ganancias-pct').innerText = pctGananciasGlobal + "%";
+        document.getElementById('badge-margen').innerText = pctGananciasGlobal + "%";
+
+        // MENSAJE WHATSAPP DE COBROS Y MEDIOS DE PAGO
+        let msjMediosDePago = encodeURIComponent(`\n\n🏦 *Medios de Pago:*\n🟣 *Nequi:* 3232332218\n🔴 *Daviplata:* 3232332218\n🗝️ *Llave:* 3232332218\n\n¿Cuándo podrías pasarnos el comprobante de tu abono? ¡Gracias!`);
 
         Object.values(clientesCRM).forEach(c => {
             tClientes.innerHTML += `<tr><td class="fw-bold text-dark">${c.nombre}</td><td>${c.telefono ? `<i class="bi bi-whatsapp text-success"></i> ${c.telefono}` : '-'}</td><td class="fw-bold text-dark">$ ${c.totalAcumulado.toLocaleString('es-CO')}</td><td class="${c.deudaTotal > 0 ? 'text-danger fw-bold' : 'text-success fw-bold'}">${c.deudaTotal > 0 ? `$ ${c.deudaTotal.toLocaleString('es-CO')}` : 'Sin deuda'}</td><td><button class="btn btn-sm btn-light border fw-bold" onclick="abrirPerfilCliente('${c.llave}')"><i class="bi bi-person me-1"></i> Perfil</button></td></tr>`;
+            
             if(c.deudaTotal > 0) {
-                let msjAgrupado = encodeURIComponent(`Hola ${c.nombre}, te saludamos de Inspiración Boutique. 🛍️\n\nTienes un saldo pendiente de *$${c.deudaTotal.toLocaleString('es-CO')}*.\n\n*Detalle:*\n`) + c.prendasPendientes.map(p => `▫️ ${p.descripcion} (Saldo: $${p.saldoDePrenda.toLocaleString('es-CO')})`).join('%0A') + encodeURIComponent(`\n\n¿Cuándo podrías pasar a realizar un abono? ¡Gracias!`);
+                let msjAgrupado = encodeURIComponent(`Hola ${c.nombre}, te saludamos de Inspiración Boutique. 🛍️\n\nTienes un saldo pendiente de *$${c.deudaTotal.toLocaleString('es-CO')}*.\n\n*Detalle:*\n`) + c.prendasPendientes.map(p => `▫️ ${p.descripcion} (Saldo: $${p.saldoDePrenda.toLocaleString('es-CO')})`).join('%0A') + msjMediosDePago;
+                
                 tCart.innerHTML += `<tr><td><span class="fw-bold text-dark">${c.nombre}</span><br><small class="text-muted fw-bold">${c.telefono || ''}</small></td><td class="fw-bold text-muted">$ ${c.totalCreditos.toLocaleString('es-CO')}</td><td class="text-danger fw-bold fs-6">$ ${c.deudaTotal.toLocaleString('es-CO')}</td><td><span class="badge" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FCA5A5;">PENDIENTE</span></td><td><div class="d-flex flex-nowrap">${c.telefono ? `<a href="https://wa.me/57${c.telefono}?text=${msjAgrupado}" target="_blank" class="btn btn-sm btn-success me-2 shadow-sm"><i class="bi bi-whatsapp"></i></a>` : ''}<button class="btn btn-sm btn-primary shadow-sm" onclick="abrirPerfilCliente('${c.llave}')"><i class="bi bi-wallet2 me-1"></i> Cobrar</button></div></td></tr>`;
             }
         });
