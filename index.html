@@ -243,7 +243,7 @@
                                     <h4 id="kpi-recaudo" class="text-dark mb-1">$ 0</h4>
                                     <div class="small fw-bold" style="color: var(--accent-blue);"><span id="kpi-recaudo-pct">0%</span> <span class="text-muted fw-normal" style="font-size: 0.7rem;">del total</span></div>
                                 </div>
-                                <div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #E0E7FF; color: var(--accent-blue);"><i class="bi bi-safe fs-5"></i></div>
+                                <div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: #E0E7FF; color: var(--accent-blue);"><i class="bi bi-bank fs-5"></i></div>
                             </div>
                         </div>
                     </div>
@@ -805,7 +805,6 @@
             }
         });
 
-        // CALCULOS DE PORCENTAJES DASHBOARD
         let pctRecaudoMes = sumaMes > 0 ? ((recaudoMes / sumaMes) * 100).toFixed(1) : 0;
         let pctCostosMes = sumaMes > 0 ? ((costosMes / sumaMes) * 100).toFixed(1) : 0;
         let pctGananciasMes = sumaMes > 0 ? ((gananciasMes / sumaMes) * 100).toFixed(1) : 0;
@@ -872,7 +871,6 @@
             }
         });
 
-        // CÁLCULOS PORCENTAJES GLOBALES (Para Ventas)
         let pctRecaudoGlobal = globalIngresos > 0 ? ((globalRecaudo / globalIngresos) * 100).toFixed(1) : 0;
         let pctCostosGlobal = globalIngresos > 0 ? ((globalCostos / globalIngresos) * 100).toFixed(1) : 0;
         let pctGananciasGlobal = globalIngresos > 0 ? ((globalGanancia / globalIngresos) * 100).toFixed(1) : 0;
@@ -886,8 +884,8 @@
         document.getElementById('badge-ganancias-pct').innerText = pctGananciasGlobal + "%";
         document.getElementById('badge-margen').innerText = pctGananciasGlobal + "%";
 
-        // MENSAJE WHATSAPP DE COBROS Y MEDIOS DE PAGO
-        let msjMediosDePago = encodeURIComponent(`\n\n🏦 *Medios de Pago:*\n🟣 *Nequi:* 3232332218\n🔴 *Daviplata:* 3232332218\n🗝️ *Llave:* 3232332218\n\n¿Cuándo podrías pasarnos el comprobante de tu abono? ¡Gracias!`);
+        // MENSAJE WHATSAPP DE COBROS Y MEDIOS DE PAGO ACTUALIZADOS
+        let msjMediosDePago = encodeURIComponent(`\n\n🏦 *Medios de Pago:*\n📱 *Nequi:* 3232332218\n🏦 *Daviplata:* 3232332218\n🔑 *Llave:* 3232332218\n\n¿Cuándo podrías pasarnos el comprobante de tu abono? ¡Gracias!`);
 
         Object.values(clientesCRM).forEach(c => {
             tClientes.innerHTML += `<tr><td class="fw-bold text-dark">${c.nombre}</td><td>${c.telefono ? `<i class="bi bi-whatsapp text-success"></i> ${c.telefono}` : '-'}</td><td class="fw-bold text-dark">$ ${c.totalAcumulado.toLocaleString('es-CO')}</td><td class="${c.deudaTotal > 0 ? 'text-danger fw-bold' : 'text-success fw-bold'}">${c.deudaTotal > 0 ? `$ ${c.deudaTotal.toLocaleString('es-CO')}` : 'Sin deuda'}</td><td><button class="btn btn-sm btn-light border fw-bold" onclick="abrirPerfilCliente('${c.llave}')"><i class="bi bi-person me-1"></i> Perfil</button></td></tr>`;
